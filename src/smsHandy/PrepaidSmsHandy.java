@@ -22,7 +22,11 @@ public class PrepaidSmsHandy extends SmsHandy {
      */
     @Override
     public boolean canSendSms() {
-        return false;
+        if (getProvider().getCreditForSmsHandy(getNumber()) >= COST_PER_SMS) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -30,7 +34,7 @@ public class PrepaidSmsHandy extends SmsHandy {
      */
     @Override
     public void payForSms() {
-
+        getProvider().deposit(getNumber(), -COST_PER_SMS);
     }
 
     /**
@@ -39,6 +43,6 @@ public class PrepaidSmsHandy extends SmsHandy {
      * @param amount Amount to load
      */
     public void dedosit(int amount) {
-
+        getProvider().deposit(getNumber(), amount);
     }
 }
