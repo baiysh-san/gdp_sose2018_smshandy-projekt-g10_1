@@ -1,12 +1,19 @@
 package smsHandy;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 /**
  * Abstract base class SmsHandy.
  */
 public abstract class SmsHandy {
     private String number;
     private Provider provider;
-
+    private List<Message> received;
+    private List<Message> sent;
     /**
      * Constructor for objects of class SmsHandy.
      * @param number the mobile phone number
@@ -15,6 +22,8 @@ public abstract class SmsHandy {
     public SmsHandy(String number, Provider provider) {
         this.number = number;
         this.provider = provider;
+        received = new ArrayList<>();
+        sent = new ArrayList<>();
     }
 
     /**
@@ -43,7 +52,10 @@ public abstract class SmsHandy {
      * @param content the content of the SMS
      */
     public void sendSmsDirect(SmsHandy peer, String content) {
-
+        Message message = new Message(content, peer.number, number, new Date());
+        peer.receiveSms(message);
+       // payForSms();
+        sent.add(message);
     }
 
     /**
@@ -51,21 +63,23 @@ public abstract class SmsHandy {
      * @param message The message object that is to be sent to the second mobile phone
      */
     public void receiveSms(Message message) {
-
+        received.add(message);
     }
 
     /**
      * Outputs a list of all sent SMS messages to the console.
      */
     public void listSent() {
-
+        System.out.println("Sent messages:");
+        sent.forEach(System.out::println);
     }
 
     /**
      * Outputs a list of all received SMS messages to the console.
      */
     public void listReceived() {
-
+        System.out.println("Received messages:");
+        received.forEach(System.out::println);
     }
 
     public String getNumber() {
