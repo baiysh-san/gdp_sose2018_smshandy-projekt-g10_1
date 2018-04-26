@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class Provider {
     private Map<String, Integer> credits;
-    private List<SmsHandy> subscribers;
+    private List<SmsHandy> subscribers; //TODO Change to Set!!!
     private List<Provider> providers;
     
     public Provider() {
