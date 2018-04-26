@@ -51,8 +51,10 @@ public class Message {
     
     @Override
     public String toString() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String message  = content+" "+to+" "+from+""+dateFormat.format(date);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        String message = dateFormat.format(date) + "\n"
+                + "From: " + from + " To: " + to + "\n"
+                + content;
         return message;
     }
     
