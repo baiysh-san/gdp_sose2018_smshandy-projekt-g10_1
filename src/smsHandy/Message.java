@@ -1,5 +1,8 @@
 package smsHandy;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 /**
  * A Message that can be sent via SMSHandy.
@@ -44,6 +47,13 @@ public class Message {
     }
     public void setTo(String to) {
         this.to = to;
+    }
+    
+    @Override
+    public String toString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String message  = content+" "+to+" "+from+""+dateFormat.format(date);
+        return message;
     }
     
     
