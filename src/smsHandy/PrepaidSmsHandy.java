@@ -1,5 +1,8 @@
 package smsHandy;
 
+/**
+ * Class PrepaidSmsHandy.
+ */
 public class PrepaidSmsHandy extends SmsHandy {
     private static final int COST_PER_SMS = 10;
     /**
