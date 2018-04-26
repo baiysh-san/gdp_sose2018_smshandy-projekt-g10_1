@@ -1,6 +1,6 @@
 package smsHandy;
 
-import java.sql.Date;
+import java.util.Date;
 /**
  * A Message that can be sent via SMSHandy.
  */
