@@ -1,7 +1,5 @@
 package smsHandy;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +22,7 @@ public abstract class SmsHandy {
         this.provider = provider;
         received = new ArrayList<>();
         sent = new ArrayList<>();
+        provider.register(this);
     }
 
     /**
@@ -32,11 +31,16 @@ public abstract class SmsHandy {
      * @param content the content of the SMS
      */
     public void sendSms(String to, String content) {
-        if (canSendSms()) {
-            Message message = new Message(content, to, number, new Date());
-            if (provider.send(message)) {
-                payForSms();
-                sent.add(message);
+        Message message = new Message(content, to, number, new Date());
+        if (to.equals("*101#")) {
+           provider.send(message);
+           sent.add(message);
+        } else {
+            if (canSendSms()) {
+                if (provider.send(message)) {
+                    payForSms();
+                    sent.add(message);
+                }
             }
         }
     }

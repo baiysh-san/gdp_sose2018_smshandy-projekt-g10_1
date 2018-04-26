@@ -27,19 +27,21 @@ public class Provider {
      * @return
      */
     public boolean send(Message message) {
-        if(message.getContent().equals("*101#")) {
+        if (message.getTo().equals("*101#")) {
             for (SmsHandy smsHandy: subscribers) {
                 if(smsHandy.getNumber().equals(message.getFrom())) {
-                    String credit = "Your credits: "+ getCreditForSmsHandy(smsHandy.getNumber());
-                    smsHandy.receiveSms(new Message(credit,"Provider",smsHandy.getNumber(), new Date()));
+                    String credit = "Your credits: " + getCreditForSmsHandy(smsHandy.getNumber());
+                    smsHandy.receiveSms(new Message(credit, smsHandy.getNumber(),"Provider", new Date()));
                     return true;
                 }
             }
         }
         String to = message.getTo();
-        if(canSendTo(to)) {
+        if (canSendTo(to)) {
             for (SmsHandy smsHandy : subscribers) {
-                smsHandy.receiveSms(message);
+                if(smsHandy.getNumber().equals(to)){
+                    smsHandy.receiveSms(message);
+                }
             }
             return true;
         } else {
@@ -53,11 +55,10 @@ public class Provider {
      * @param smsHandy
      */
     public void register(SmsHandy smsHandy) {
-        subscribers.add(smsHandy);
         if(credits.containsKey(smsHandy.getNumber())) {
             //TODO Exception
             System.out.println("This phone is already registered!");
-        }else {
+        } else {
             credits.put(smsHandy.getNumber(), 100);
             subscribers.add(smsHandy);
         }
@@ -76,8 +77,8 @@ public class Provider {
      */
     public void deposit(String number, int amount) {
         if(canSendTo(number)) {
-            credits.put(number, credits.get(number)+amount);
-        }else {
+            credits.put(number, credits.get(number) + amount);
+        } else {
             System.out.println("This phone number is not subscriber!");
         }
     }
