@@ -32,7 +32,13 @@ public abstract class SmsHandy {
      * @param content the content of the SMS
      */
     public void sendSms(String to, String content) {
-
+        if (canSendSms()) {
+            Message message = new Message(content, to, number, new Date());
+            if (provider.send(message)) {
+                payForSms();
+                sent.add(message);
+            }
+        }
     }
 
     /**
@@ -52,10 +58,12 @@ public abstract class SmsHandy {
      * @param content the content of the SMS
      */
     public void sendSmsDirect(SmsHandy peer, String content) {
-        Message message = new Message(content, peer.number, number, new Date());
-        peer.receiveSms(message);
-       // payForSms();
-        sent.add(message);
+        if (canSendSms()) {
+            Message message = new Message(content, peer.number, number, new Date());
+            peer.receiveSms(message);
+            payForSms();
+            sent.add(message);
+        }
     }
 
     /**
