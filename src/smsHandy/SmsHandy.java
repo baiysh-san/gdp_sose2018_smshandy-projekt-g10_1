@@ -71,7 +71,11 @@ public abstract class SmsHandy {
      */
     public void listSent() {
         System.out.println("Sent messages:");
-        sent.forEach(System.out::println);
+        System.out.println("------------------------------------------");
+        sent.forEach(message -> {
+            System.out.println(message);
+            System.out.println("------------------------------------------");
+        });
     }
 
     /**
@@ -79,7 +83,11 @@ public abstract class SmsHandy {
      */
     public void listReceived() {
         System.out.println("Received messages:");
-        received.forEach(System.out::println);
+        System.out.println("------------------------------------------");
+        received.forEach(message -> {
+            System.out.println(message);
+            System.out.println("------------------------------------------");
+        });
     }
 
     public String getNumber() {
