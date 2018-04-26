@@ -26,8 +26,18 @@ public class Provider {
      * @return
      */
     public boolean send(Message message) {
-        return true;
+        String to = message.getTo();
+        if(canSendTo(to)) {
+            for (SmsHandy smsHandy : subscribers) {
+                smsHandy.receiveSms(message);
+                
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
+    
     
     /**
      * Register a new "SmsHandy" with this provider.
@@ -39,7 +49,7 @@ public class Provider {
             //TODO Exception
             System.out.println("This phone is already registered!");
         }else {
-            credits.put(smsHandy.getNumber(), 0);
+            credits.put(smsHandy.getNumber(), 100);
             subscribers.add(smsHandy);
         }
     }
@@ -78,11 +88,12 @@ public class Provider {
      * @return
      */
     private boolean canSendTo(String number) {
-        if(credits.containsKey(number)) {
-            return true;
-        } else {
-            return false;
+        for (SmsHandy smsHandy : subscribers) {
+            if(smsHandy.getNumber().equals(number)){
+                return true;
+            } 
         }
+        return false;
     }
     
     /**
