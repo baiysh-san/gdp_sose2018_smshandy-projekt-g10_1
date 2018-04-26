@@ -1,6 +1,7 @@
 package smsHandy;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,11 +27,19 @@ public class Provider {
      * @return
      */
     public boolean send(Message message) {
+        if(message.getContent().equals("*101#")) {
+            for (SmsHandy smsHandy: subscribers) {
+                if(smsHandy.getNumber().equals(message.getFrom())) {
+                    String credit = "Your credits: "+ getCreditForSmsHandy(smsHandy.getNumber());
+                    smsHandy.receiveSms(new Message(credit,"Provider",smsHandy.getNumber(), new Date()));
+                    return true;
+                }
+            }
+        }
         String to = message.getTo();
         if(canSendTo(to)) {
             for (SmsHandy smsHandy : subscribers) {
                 smsHandy.receiveSms(message);
-                
             }
             return true;
         } else {
