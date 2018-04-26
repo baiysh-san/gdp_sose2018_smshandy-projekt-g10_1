@@ -22,7 +22,11 @@ public class TariffPlanSmsHandy extends SmsHandy {
      */
     @Override
     public boolean canSendSms() {
-        return false;
+        if (remainingFreeSms > 0){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -30,7 +34,7 @@ public class TariffPlanSmsHandy extends SmsHandy {
      */
     @Override
     public void payForSms() {
-
+        remainingFreeSms--;
     }
 
     /**
@@ -38,6 +42,6 @@ public class TariffPlanSmsHandy extends SmsHandy {
      * @return Number of free SMS
      */
     public int getRemainingFreeSms() {
-        return 0;
+        return remainingFreeSms;
     }
 }
