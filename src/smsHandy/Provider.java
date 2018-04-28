@@ -13,12 +13,12 @@ import java.util.Map;
 public class Provider {
     private Map<String, Integer> credits;
     private List<SmsHandy> subscribers; //TODO Change to Set!!!
-    private List<Provider> providers;
+    private static List<Provider> providerList = new ArrayList<>();
     
     public Provider() {
         credits = new HashMap<>();
         subscribers = new ArrayList<>();
-        providers = new ArrayList<>();
+        providerList.add(this);
     }
     
     /**
@@ -37,16 +37,22 @@ public class Provider {
             }
         }
         String to = message.getTo();
-        if (canSendTo(to)) {
+        if(canSendTo(to)) {
             for (SmsHandy smsHandy : subscribers) {
-                if(smsHandy.getNumber().equals(to)){
-                    smsHandy.receiveSms(message);
-                }
+                smsHandy.receiveSms(message);
             }
             return true;
         } else {
-            return false;
+            Provider provider = findProviderFor(to);
+            if(provider!=null) {
+                provider.send(message);
+                return true;
+            } else {
+                return false; //TODO Exceptions
+            }
         }
+        
+        
     }
     
     
@@ -97,9 +103,9 @@ public class Provider {
      * @param number
      * @return
      */
-    private boolean canSendTo(String number) {
+    private boolean canSendTo(String receiver) {
         for (SmsHandy smsHandy : subscribers) {
-            if(smsHandy.getNumber().equals(number)){
+            if(smsHandy.getNumber().equals(receiver)){
                 return true;
             } 
         }
@@ -111,7 +117,12 @@ public class Provider {
      * @param number
      * @return
      */
-    //private Provider findProviderFor(String number) {
-     //   providers.
-    //}
+    private Provider findProviderFor(String receiver) {
+       for (Provider provider : providerList) {
+           if(provider.canSendTo(receiver)) {
+               return provider;
+           } 
+       }
+       return null;
+    }
 }
