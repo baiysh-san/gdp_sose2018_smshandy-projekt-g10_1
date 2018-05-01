@@ -43,10 +43,10 @@ public class Message {
         this.date = date;
     }
     public void setFrom(String from) {
-        this.from = from;
+        this.from = from; //TODO Exception not number
     }
     public void setTo(String to) {
-        this.to = to;
+        this.to = to;//TODO Exception not number
     }
     
     @Override
