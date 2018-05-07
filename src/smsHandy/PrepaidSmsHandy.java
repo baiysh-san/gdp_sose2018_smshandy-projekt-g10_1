@@ -42,7 +42,7 @@ public class PrepaidSmsHandy extends SmsHandy {
      *
      * @param amount Amount to load
      */
-    public void dedosit(int amount) {
+    public void dedosit(int amount) {//deposit TODO
         if (amount > 0) {
             getProvider().deposit(getNumber(), amount);
         } else {
