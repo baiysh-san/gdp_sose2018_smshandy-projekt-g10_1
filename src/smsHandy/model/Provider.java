@@ -11,8 +11,9 @@ public class Provider {
     private Map<String, Integer> credits;
     private Set<SmsHandy> subscribers;
     private static List<Provider> providerList = new ArrayList<>();
-    
-    public Provider() {
+    private String name;
+    public Provider(String name) {
+        this.name = name;
         credits = new HashMap<>();
         subscribers = new HashSet<>();
         providerList.add(this);
@@ -117,5 +118,13 @@ public class Provider {
            } 
        }
        return null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
