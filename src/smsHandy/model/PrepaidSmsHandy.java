@@ -46,7 +46,7 @@ public class PrepaidSmsHandy extends SmsHandy {
      *
      * @param amount Amount to load
      */
-    public void dedosit(int amount) throws Exception {
+    public void deposit(int amount) throws Exception {
         if (amount > 0) {
             getProvider().deposit(getNumber(), amount);
         } else {
