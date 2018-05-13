@@ -1,4 +1,4 @@
-package smsHandy;
+package smsHandy.model;
 
 /**
  * Class TariffPlanSmsHandy. A contract mobile phone that has a certain amount of free SMS.

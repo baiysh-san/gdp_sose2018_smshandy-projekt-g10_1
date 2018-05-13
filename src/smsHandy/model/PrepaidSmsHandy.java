@@ -1,4 +1,4 @@
-package smsHandy;
+package smsHandy.model;
 
 /**
  * Class PrepaidSmsHandy.
