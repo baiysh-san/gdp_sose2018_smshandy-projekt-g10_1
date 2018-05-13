@@ -17,7 +17,7 @@ public abstract class SmsHandy {
      * @param number the mobile phone number
      * @param provider the provider instance
      */
-    public SmsHandy(String number, Provider provider) {
+    public SmsHandy(String number, Provider provider) throws Exception {
         this.number = number;
         this.provider = provider;
         received = new ArrayList<>();
@@ -30,7 +30,7 @@ public abstract class SmsHandy {
      * @param to the recipient of the SMS
      * @param content the content of the SMS
      */
-    public void sendSms(String to, String content) {
+    public void sendSms(String to, String content) throws Exception {
         Message message = new Message(content, to, number, new Date());
         if (to.equals("*101#")) {
            provider.send(message);

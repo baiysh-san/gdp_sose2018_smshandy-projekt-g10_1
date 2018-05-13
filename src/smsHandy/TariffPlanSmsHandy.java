@@ -11,7 +11,7 @@ public class TariffPlanSmsHandy extends SmsHandy {
      * @param number   the mobile phone number
      * @param provider the provider instance
      */
-    public TariffPlanSmsHandy(String number, Provider provider) {
+    public TariffPlanSmsHandy(String number, Provider provider) throws Exception {
         super(number, provider);
     }
 
@@ -33,7 +33,7 @@ public class TariffPlanSmsHandy extends SmsHandy {
      * Reduces the free SMS.
      */
     @Override
-    public void payForSms() {//Potestit'
+    public void payForSms() {
         remainingFreeSms--;
     }
 

@@ -11,7 +11,7 @@ public class PrepaidSmsHandy extends SmsHandy {
      * @param number   the mobile phone number
      * @param provider the provider instance
      */
-    public PrepaidSmsHandy(String number, Provider provider) {
+    public PrepaidSmsHandy(String number, Provider provider) throws Exception {
         super(number, provider);
     }
 
@@ -34,7 +34,11 @@ public class PrepaidSmsHandy extends SmsHandy {
      */
     @Override
     public void payForSms() {
-        getProvider().deposit(getNumber(), -COST_PER_SMS);
+        try {
+            getProvider().deposit(getNumber(), -COST_PER_SMS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -42,11 +46,11 @@ public class PrepaidSmsHandy extends SmsHandy {
      *
      * @param amount Amount to load
      */
-    public void dedosit(int amount) {//deposit TODO
+    public void dedosit(int amount) throws Exception {
         if (amount > 0) {
             getProvider().deposit(getNumber(), amount);
         } else {
-
+            throw new Exception("Amount must be greater than 0");
         }
     }
 }

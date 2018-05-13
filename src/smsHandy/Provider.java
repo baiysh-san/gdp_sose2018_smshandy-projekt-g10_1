@@ -1,10 +1,7 @@
 package smsHandy;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 /**
  * TODO Create packages for model, tests, etc...
  * 
@@ -12,12 +9,12 @@ import java.util.Map;
  */
 public class Provider {
     private Map<String, Integer> credits;
-    private List<SmsHandy> subscribers; //TODO Change to Set!!!
+    private Set<SmsHandy> subscribers;
     private static List<Provider> providerList = new ArrayList<>();
     
     public Provider() {
         credits = new HashMap<>();
-        subscribers = new ArrayList<>();
+        subscribers = new HashSet<>();
         providerList.add(this);
     }
     
@@ -26,7 +23,7 @@ public class Provider {
      * @param message
      * @return
      */
-    public boolean send(Message message) {
+    public boolean send(Message message) throws Exception {
         if (message.getTo().equals("*101#")) {
             for (SmsHandy smsHandy: subscribers) {
                 if(smsHandy.getNumber().equals(message.getFrom())) {
@@ -44,26 +41,22 @@ public class Provider {
             return true;
         } else {
             Provider provider = findProviderFor(to);
-            if(provider!=null) {
+            if (provider != null) {
                 provider.send(message);
                 return true;
             } else {
-                return false; //TODO Exceptions
+                throw new Exception("This number doesn't exist");
             }
         }
-        
-        
     }
-    
-    
+
     /**
      * Register a new "SmsHandy" with this provider.
      * @param smsHandy
      */
-    public void register(SmsHandy smsHandy) {
+    public void register(SmsHandy smsHandy) throws Exception {
         if(credits.containsKey(smsHandy.getNumber())) {
-            //TODO Exception
-            System.out.println("This phone is already registered!");
+            throw new Exception("This phone is already registered!");
         } else {
             credits.put(smsHandy.getNumber(), 100);
             subscribers.add(smsHandy);
@@ -81,11 +74,11 @@ public class Provider {
      * @param number
      * @param amount
      */
-    public void deposit(String number, int amount) {
+    public void deposit(String number, int amount) throws Exception {
         if(canSendTo(number)) {
             credits.put(number, credits.get(number) + amount);
         } else {
-            System.out.println("This phone number is not subscriber!");//TODO exception
+            throw new Exception("This phone number is not subscriber!");
         }
     }
     
@@ -100,12 +93,12 @@ public class Provider {
     
     /**
      * 
-     * @param number
+     * @param receiver
      * @return
      */
     private boolean canSendTo(String receiver) {
         for (SmsHandy smsHandy : subscribers) {
-            if(smsHandy.getNumber().equals(receiver)){
+            if (smsHandy.getNumber().equals(receiver)){
                 return true;
             } 
         }
@@ -114,12 +107,12 @@ public class Provider {
     
     /**
      * 
-     * @param number
+     * @param receiver
      * @return
      */
-    private Provider findProviderFor(String receiver) {
+    private static Provider findProviderFor(String receiver) {
        for (Provider provider : providerList) {
-           if(provider.canSendTo(receiver)) {
+           if (provider.canSendTo(receiver)) {
                return provider;
            } 
        }
