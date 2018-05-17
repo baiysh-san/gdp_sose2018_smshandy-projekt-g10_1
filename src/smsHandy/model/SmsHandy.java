@@ -113,4 +113,12 @@ public abstract class SmsHandy {
     public void setProvider(Provider provider) {
         this.provider = provider;
     }
+
+    public List<Message> getReceived() {
+        return received;
+    }
+
+    public List<Message> getSent() {
+        return sent;
+    }
 }
