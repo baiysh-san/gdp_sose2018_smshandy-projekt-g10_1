@@ -33,7 +33,7 @@ public class PrepaidSmsHandyTest {
     }
 
     @Test
-    public void testPayForSms() {
+    public void payForSms() {
         Assert.assertEquals(creditOfHandy, provider.getCreditForSmsHandy(prepaidSmsHandy.getNumber()));
         prepaidSmsHandy.payForSms();
         Assert.assertNotEquals(creditOfHandy, provider.getCreditForSmsHandy(prepaidSmsHandy.getNumber()));
@@ -41,7 +41,7 @@ public class PrepaidSmsHandyTest {
     }
 
     @Test
-    public void testDeposit() throws Exception {
+    public void deposit() throws Exception {
         Assert.assertEquals(creditOfHandy, provider.getCreditForSmsHandy(prepaidSmsHandy.getNumber()));
         prepaidSmsHandy.deposit(100);
         Assert.assertNotEquals(creditOfHandy, provider.getCreditForSmsHandy(prepaidSmsHandy.getNumber()));
