@@ -18,6 +18,8 @@ public class Message {
     }
     
     public Message(String content, String to, String from, Date date) {
+        isNumber(to);
+        isNumber(from);
         this.content = content;
         this.to = to;
         this.from = from;
@@ -43,10 +45,10 @@ public class Message {
         this.date = date;
     }
     public void setFrom(String from) {
-        this.from = from; //TODO Exception not number
+        if(isNumber(from))this.from = from;
     }
     public void setTo(String to) {
-        this.to = to;//TODO Exception not number
+        if(isNumber(to)) this.to = to;
     }
     
     @Override
@@ -56,6 +58,14 @@ public class Message {
                 + "From: " + from + " To: " + to + "\n"
                 + content;
         return message;
+    }
+    
+    public boolean isNumber(String number) {
+        if(number.matches("[0-9*#+]+")) {
+            return true;
+        } else {
+            throw new NumberFormatException("\""+ number +"\" is not number!");
+        }
     }
     
     

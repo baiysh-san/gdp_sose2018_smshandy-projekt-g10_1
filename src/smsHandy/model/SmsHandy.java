@@ -18,11 +18,21 @@ public abstract class SmsHandy {
      * @param provider the provider instance
      */
     public SmsHandy(String number, Provider provider) throws Exception {
+        
+        isNumber(number);
         this.number = number;
         this.provider = provider;
         received = new ArrayList<>();
         sent = new ArrayList<>();
         provider.register(this);
+    }
+    
+    public boolean isNumber(String number) {
+        if(number.matches("[0-9*#+]+")) {
+            return true;
+        } else {
+            throw new NumberFormatException("\""+ number +"\" is not number!");
+        }
     }
 
     /**
