@@ -26,7 +26,11 @@ public abstract class SmsHandy {
         sent = new ArrayList<>();
         provider.register(this);
     }
-    
+    /**
+     * Checks if number is number or *#+
+     * @param number
+     * @return
+     */
     public boolean isNumber(String number) {
         if(number.matches("[0-9*#+]+")) {
             return true;
