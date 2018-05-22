@@ -13,8 +13,7 @@ public class Message {
     private String from;
     private String to;
     
-    public Message() {
-        
+    public Message() {   
     }
     
     public Message(String content, String to, String from, Date date) {
@@ -57,14 +56,5 @@ public class Message {
                 + content;
         return message;
     }
-    
-    /*public boolean isNumber(String number) {
-        if(number.matches("[0-9*#+]+")) {
-            return true;
-        } else {
-            throw new NumberFormatException("\""+ number +"\" is not number!");
-        }
-    }*/
-    
-    
+     
 }

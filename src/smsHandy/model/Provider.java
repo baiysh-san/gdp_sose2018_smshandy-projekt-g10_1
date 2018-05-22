@@ -3,8 +3,7 @@ package smsHandy.model;
 import java.util.*;
 
 /**
- * TODO Create packages for model, tests, etc...
- * 
+ *  Class Provider 
  *
  */
 public class Provider {
@@ -41,7 +40,6 @@ public class Provider {
                     smsHandy.receiveSms(message);
                 }
             }
-
             return true;
         } else {
             Provider provider = findProviderFor(to);
@@ -96,7 +94,8 @@ public class Provider {
     }
     
     /**
-     * 
+     * Returns true if and only if a subscriber with the number 
+     * receiver is registered with this provider.
      * @param receiver
      * @return
      */
@@ -110,7 +109,8 @@ public class Provider {
     }
     
     /**
-     * 
+     * Returns the provider where the subscriber with the number receiver is registered, 
+     * or null if the number does not exist.
      * @param receiver
      * @return
      */
