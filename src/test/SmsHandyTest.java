@@ -40,4 +40,19 @@ public class SmsHandyTest {
         Assert.assertEquals(receiverHandy.getNumber(), senderHandy.getSent().get(0).getTo());
         Assert.assertEquals(receiverHandy.getNumber(), receiverHandy.getReceived().get(0).getTo());
     }
+    @Test
+    public void isNumber() throws Exception{
+        Provider provider = new Provider("Provider");
+        SmsHandy handy = new PrepaidSmsHandy("1233", provider);
+        Assert.assertTrue(handy.isNumber("1234"));
+        Assert.assertTrue(handy.isNumber("+*100#"));
+    }
+    @Test(expected = Exception.class)
+    public void isNumberExceptionTest() throws Exception {
+        Provider provider = new Provider("Provider");
+        SmsHandy handy = new PrepaidSmsHandy("1233", provider);
+        handy.isNumber("AAA");
+        handy.isNumber("");
+        
+    }
 }
