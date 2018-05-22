@@ -12,7 +12,6 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
     ProviderTest.class,
     PrepaidSmsHandyTest.class,
-    ProviderTest.class,
     SmsHandyTest.class,
     TariffPlanSmsHandyTest.class
 })

@@ -35,10 +35,13 @@ public class Provider {
             }
         }
         String to = message.getTo();
-        if(canSendTo(to)) {
+        if (canSendTo(to)) {
             for (SmsHandy smsHandy : subscribers) {
-                smsHandy.receiveSms(message);
+                if (smsHandy.getNumber().equals(to)) {
+                    smsHandy.receiveSms(message);
+                }
             }
+
             return true;
         } else {
             Provider provider = findProviderFor(to);

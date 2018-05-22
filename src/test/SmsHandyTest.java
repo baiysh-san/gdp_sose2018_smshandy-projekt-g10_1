@@ -9,36 +9,35 @@ import smsHandy.model.SmsHandy;
 import smsHandy.model.TariffPlanSmsHandy;
 
 public class SmsHandyTest {
-    private Provider provider1;
-    private Provider provider2;
-    private SmsHandy smsHandy1;
-    private SmsHandy smsHandy2;
-    private SmsHandy smsHandy3;
-    @Before
-    public void setUp() throws Exception {
-        provider1 = new Provider("testProvider");
-        provider2 = new Provider("testProvider2");
-        smsHandy1 = new PrepaidSmsHandy("0312666155", provider1);
-        smsHandy2 = new TariffPlanSmsHandy("0312630127", provider2);
-        smsHandy3 = new PrepaidSmsHandy("0312293098", provider1);
-    }
+
     @Test
     public void sendSms() throws Exception {
-        smsHandy1.sendSms(smsHandy3.getNumber(), "test");
-        Assert.assertEquals(smsHandy3.getNumber(), smsHandy1.getSent().get(0).getTo());
-        Assert.assertEquals(smsHandy3.getNumber(), smsHandy3.getReceived().get(0).getTo());
+        Provider testProvider = new Provider("testProvider");
+        Provider testProvider2 = new Provider("testProvider 2");
+        SmsHandy senderHandy = new PrepaidSmsHandy("1111", testProvider);
+        SmsHandy receiverHandy = new TariffPlanSmsHandy("2222", testProvider2);
+        SmsHandy receiverHandy2 = new PrepaidSmsHandy("3333", testProvider);
 
-        smsHandy1.sendSms(smsHandy2.getNumber(), "test");
-        Assert.assertEquals(smsHandy2.getNumber(), smsHandy1.getSent().get(1).getTo());
-        Assert.assertEquals(smsHandy2.getNumber(), smsHandy2.getReceived().get(0).getTo());
+        senderHandy.sendSms(receiverHandy2.getNumber(), "test1");
+        Assert.assertEquals(receiverHandy2.getNumber(), senderHandy.getSent().get(0).getTo());
+        Assert.assertEquals(receiverHandy2.getNumber(), receiverHandy2.getReceived().get(0).getTo());
 
-        smsHandy1.sendSms("*101#", "testo");
-        Assert.assertEquals("*101#", smsHandy1.getSent().get(2).getTo());
+        senderHandy.sendSms(receiverHandy.getNumber(), "test2");
+        Assert.assertEquals(receiverHandy.getNumber(), senderHandy.getSent().get(1).getTo());
+        Assert.assertEquals(receiverHandy.getNumber(), receiverHandy.getReceived().get(0).getTo());
+
+
+        senderHandy.sendSms("*101#", "testo");
+        Assert.assertEquals("*101#", senderHandy.getSent().get(2).getTo());
     }
     @Test
-    public void sendSmsDirect() {
-        smsHandy2.sendSmsDirect(smsHandy1, "Hallo");
-        Assert.assertEquals(smsHandy1.getNumber(), smsHandy2.getSent().get(0).getTo());
-        Assert.assertEquals(smsHandy1.getNumber(), smsHandy1.getReceived().get(0).getTo());
+    public void sendSmsDirect() throws  Exception {
+        Provider senderProvider = new Provider("senderProvider");
+        Provider receiverProvider = new Provider("receiverProvider");
+        SmsHandy senderHandy = new TariffPlanSmsHandy("4444", senderProvider);
+        SmsHandy receiverHandy = new PrepaidSmsHandy("5555", receiverProvider);
+        senderHandy.sendSmsDirect(receiverHandy, "Hallo");
+        Assert.assertEquals(receiverHandy.getNumber(), senderHandy.getSent().get(0).getTo());
+        Assert.assertEquals(receiverHandy.getNumber(), receiverHandy.getReceived().get(0).getTo());
     }
 }
