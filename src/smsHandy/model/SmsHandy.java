@@ -8,6 +8,7 @@ import java.util.List;
  * Abstract base class SmsHandy.
  */
 public abstract class SmsHandy {
+
     private String number;
     private Provider provider;
     private List<Message> received;
