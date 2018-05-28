@@ -36,7 +36,6 @@ public class PrepaidSmsHandyTest {
     public void payForSms() {
         Assert.assertEquals(creditOfHandy, provider.getCreditForSmsHandy(prepaidSmsHandy.getNumber()));
         prepaidSmsHandy.payForSms();
-        Assert.assertNotEquals(creditOfHandy, provider.getCreditForSmsHandy(prepaidSmsHandy.getNumber()));
         Assert.assertEquals(creditOfHandy - COST_PER_SMS, provider.getCreditForSmsHandy(prepaidSmsHandy.getNumber()));
     }
 
@@ -44,7 +43,6 @@ public class PrepaidSmsHandyTest {
     public void deposit() throws Exception {
         Assert.assertEquals(creditOfHandy, provider.getCreditForSmsHandy(prepaidSmsHandy.getNumber()));
         prepaidSmsHandy.deposit(100);
-        Assert.assertNotEquals(creditOfHandy, provider.getCreditForSmsHandy(prepaidSmsHandy.getNumber()));
         Assert.assertEquals(creditOfHandy + 100, provider.getCreditForSmsHandy(prepaidSmsHandy.getNumber()));
     }
 
