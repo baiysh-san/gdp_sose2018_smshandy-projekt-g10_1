@@ -30,8 +30,9 @@ public class MainApp extends Application{
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/RootPanel.fxml"));
             rootPane = (BorderPane)loader.load();
-            Scene scene  = new Scene(rootPane);
+            Scene scene  = new Scene(rootPane, 650,400);
             stage.setScene(scene);
+            
             stage.show();
             
         } catch (IOException e) {
