@@ -29,7 +29,7 @@ public class MainApp extends Application{
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/RootPanel.fxml"));
-            rootPane = (BorderPane)loader.load();
+            rootPane = loader.load();
             Scene scene  = new Scene(rootPane, 650,400);
             stage.setScene(scene);
             
@@ -43,7 +43,7 @@ public class MainApp extends Application{
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/ProviderOverview.fxml"));
-            AnchorPane providerOverview = (AnchorPane) loader.load();
+            AnchorPane providerOverview = loader.load();
             rootPane.setLeft(providerOverview);
         } catch (IOException e) {
             e.printStackTrace();
@@ -53,7 +53,7 @@ public class MainApp extends Application{
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/HandyOverview.fxml"));
-            AnchorPane handyOverview = (AnchorPane) loader.load();
+            AnchorPane handyOverview = loader.load();
             rootPane.setCenter(handyOverview);
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,7 +63,7 @@ public class MainApp extends Application{
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/MessageOverview.fxml"));
-            VBox messageOverview = (VBox) loader.load();
+            AnchorPane messageOverview = loader.load();
             rootPane.setRight(messageOverview);
            
         } catch (IOException e) {
