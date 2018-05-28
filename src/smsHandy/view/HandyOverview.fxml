@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+   <children>
+      <TableView prefHeight="325.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="199.0" text="SMS-Handys" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
