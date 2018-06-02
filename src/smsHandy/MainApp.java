@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -23,6 +24,7 @@ public class MainApp extends Application{
     private ObservableList<Provider> providers = FXCollections.observableArrayList();
     private ObservableList<SmsHandy> handies = FXCollections.observableArrayList();
     public MainApp() throws Exception {
+        
         Provider nettoCOM = new Provider("nettoCOM");
         Provider o2 = new Provider("O2");
         Provider beeline = new Provider("Beeline");
@@ -44,6 +46,9 @@ public class MainApp extends Application{
     public void start(Stage stage) throws Exception {
         // TODO Auto-generated method stub
         this.stage = stage;
+        this.stage.setTitle("SMS-Handy-App");
+        this.stage.setResizable(false);
+        this.stage.getIcons().add(new Image("file:resources/images/phone.png"));
         showRootPanel();
         showSmsHandyOverview();
         //showMessageOverview();
