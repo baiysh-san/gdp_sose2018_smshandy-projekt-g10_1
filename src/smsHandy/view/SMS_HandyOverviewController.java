@@ -33,12 +33,21 @@ public class SMS_HandyOverviewController {
     private Text currentProviderText;
     @FXML
     private Text numberOfHandysText;
+    @FXML
+    private Text textNumber;
+    @FXML
+    private Text textTarif;
+    @FXML
+    private Text textProvider;
+    @FXML
+    private Text textBalance;
 
 
     private MainApp mainApp;
     public SMS_HandyOverviewController() {
 
     }
+    
     @FXML
     private void initialize() {
         providerNameColumn.setCellValueFactory(cellValue -> cellValue.getValue().getNameProperty());
@@ -50,6 +59,14 @@ public class SMS_HandyOverviewController {
                         showHandysOfCurrentProvider(newValue);
                     }
                 });
+        smsHandyTableView.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue)->{
+                    if(newValue!=null) {
+                        showInfoOfCurrentHandy(newValue);
+                    }
+                });
+                
+                
 
     }
 
@@ -70,6 +87,7 @@ public class SMS_HandyOverviewController {
             CreateProviderController controller = fxmlLoader.getController();
             controller.setMainApp(mainApp);
             Stage stage = new Stage();
+            stage.setTitle("Create provider");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.show();
@@ -85,10 +103,9 @@ public class SMS_HandyOverviewController {
             Provider.getProviderList().remove(provider);
             mainApp.getProviders().remove(provider);
             provider.removeAllHandys();
-            mainApp.getHandies().removeIf(h -> h.getProvider() == provider);
+            mainApp.getHandies().removeIf(handy -> handy.getProvider() == provider);
         } else {
-            //TODO Alert - типа не выбран провайдер, плиз выберите провайдера!
-            showAlert("AAA", "BBB");
+            showAlert("Provider is not selected!", "Please select Provider!");
         }
 
     }
@@ -99,6 +116,14 @@ public class SMS_HandyOverviewController {
         smsHandyTableView.setItems(mainApp.getHandysByProvider(provider));
         currentProviderText.setText(provider.getName());
         numberOfHandysText.setText(String.valueOf(mainApp.getHandysByProvider(provider).size()));
+    }
+    private void showInfoOfCurrentHandy(SmsHandy smsHandy) {
+        
+        textNumber.setText(smsHandy.getNumber());
+        textTarif.setText(smsHandy.getType());
+        textProvider.setText(smsHandy.getProvider().getName());
+        //TODO TODO TODO!!!
+        textBalance.setText("TODO");
     }
     @FXML
     private void showAllHandys() {
