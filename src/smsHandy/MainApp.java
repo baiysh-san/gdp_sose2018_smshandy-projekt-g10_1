@@ -87,6 +87,10 @@ public class MainApp extends Application{
         return providers;
     }
 
+    public Stage getStage() {
+        return stage;
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
