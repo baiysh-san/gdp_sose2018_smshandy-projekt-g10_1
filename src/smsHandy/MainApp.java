@@ -7,14 +7,12 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import smsHandy.model.Provider;
-import smsHandy.view.RootController;
+import smsHandy.view.SMS_HandyOverviewController;
 
 public class MainApp extends Application{
     private Stage stage; 
@@ -30,9 +28,10 @@ public class MainApp extends Application{
         // TODO Auto-generated method stub
         this.stage = stage;
         showRootPanel();
-        showMessageOverview();
-        showProviderOverview();
-        showHandyOverview();
+        showSmsHandyOverview();
+        //showMessageOverview();
+        //showProviderOverview();
+        //showHandyOverview();
     }
     
     public void showRootPanel() {
@@ -49,39 +48,53 @@ public class MainApp extends Application{
             e.printStackTrace();
         }
     }
-    public void showProviderOverview() {
+    public void showSmsHandyOverview() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/ProviderOverview.fxml"));
-            AnchorPane providerOverview = loader.load();
-            RootController rootController = loader.getController();
-            rootController.setMainApp(this);
-            rootPane.setLeft(providerOverview);
+            loader.setLocation(MainApp.class.getResource("view/SMS-HandyOverview.fxml"));
+            AnchorPane smsHandyOverview = (AnchorPane) loader.load();
+            rootPane.setCenter(smsHandyOverview);
+
+            SMS_HandyOverviewController controller = loader.getController();
+            controller.setMainApp(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void showHandyOverview() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/HandyOverview.fxml"));
-            AnchorPane handyOverview = loader.load();
-            rootPane.setCenter(handyOverview);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public void showMessageOverview() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/MessageOverview.fxml"));
-            AnchorPane messageOverview = loader.load();
-            rootPane.setRight(messageOverview);
-           
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
+//    public void showProviderOverview() {
+//        try {
+//            FXMLLoader loader = new FXMLLoader();
+//            loader.setLocation(MainApp.class.getResource("view/ProviderOverview.fxml"));
+//            AnchorPane providerOverview = loader.load();
+//            SMS_HandyOverviewController rootController = loader.getController();
+//            rootController.setMainApp(this);
+//            rootPane.setLeft(providerOverview);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    public void showHandyOverview() {
+//        try {
+//            FXMLLoader loader = new FXMLLoader();
+//            loader.setLocation(MainApp.class.getResource("view/HandyOverview.fxml"));
+//            AnchorPane handyOverview = loader.load();
+//            rootPane.setCenter(handyOverview);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    public void showMessageOverview() {
+//        try {
+//            FXMLLoader loader = new FXMLLoader();
+//            loader.setLocation(MainApp.class.getResource("view/MessageOverview.fxml"));
+//            AnchorPane messageOverview = loader.load();
+//            rootPane.setRight(messageOverview);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public ObservableList<Provider> getProviders() {
         return providers;

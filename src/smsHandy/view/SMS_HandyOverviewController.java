@@ -17,7 +17,7 @@ import smsHandy.model.SmsHandy;
 
 import java.io.IOException;
 
-public class RootController {
+public class SMS_HandyOverviewController {
     @FXML
     private TableView<Provider> providerTableView;
     @FXML
@@ -27,7 +27,7 @@ public class RootController {
 //    private TextField createProviderTextField;
 
     private MainApp mainApp;
-    public RootController() {
+    public SMS_HandyOverviewController() {
 
     }
     @FXML
