@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -44,7 +45,11 @@ public class SMS_HandyOverviewController {
         handyNumberColumn.setCellValueFactory(cellValue -> cellValue.getValue().getNumberProperty());
         handyTypeColumn.setCellValueFactory(cellValue -> cellValue.getValue().getTypeProperty());
         providerTableView.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> showHandysOfCurrentProvider(newValue));
+                (observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        showHandysOfCurrentProvider(newValue);
+                    }
+                });
 
     }
 
@@ -72,6 +77,21 @@ public class SMS_HandyOverviewController {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void handleDeleteProviderButton() {
+        int selectedIndex = providerTableView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            Provider provider = providerTableView.getSelectionModel().getSelectedItem();
+            Provider.getProviderList().remove(provider);
+            mainApp.getProviders().remove(provider);
+            provider.removeAllHandys();
+            mainApp.getHandies().removeIf(h -> h.getProvider() == provider);
+        } else {
+            //TODO Alert - типа не выбран провайдер, плиз выберите провайдера!
+            showAlert("AAA", "BBB");
+        }
+
+    }
     private String getNumberOfAllHandys() {
         return String.valueOf(mainApp.getHandies().size());
     }
@@ -79,5 +99,18 @@ public class SMS_HandyOverviewController {
         smsHandyTableView.setItems(mainApp.getHandysByProvider(provider));
         currentProviderText.setText(provider.getName());
         numberOfHandysText.setText(String.valueOf(mainApp.getHandysByProvider(provider).size()));
+    }
+    @FXML
+    private void showAllHandys() {
+        smsHandyTableView.setItems(mainApp.getHandies());
+        currentProviderText.setText("All");
+        numberOfHandysText.setText(getNumberOfAllHandys());
+    }
+    private void showAlert(String headerText, String contentText) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(mainApp.getStage());
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
     }
 }

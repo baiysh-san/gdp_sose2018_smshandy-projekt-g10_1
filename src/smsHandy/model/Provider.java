@@ -140,4 +140,12 @@ public class Provider {
     public StringProperty getNameProperty() {
         return nameProperty;
     }
+
+    public static List<Provider> getProviderList() {
+        return providerList;
+    }
+    public void removeAllHandys() {
+        subscribers.clear();
+        credits.clear();
+    }
 }
