@@ -16,6 +16,8 @@ public abstract class SmsHandy {
     private Provider provider;
     private List<Message> received;
     private List<Message> sent;
+    private String receivedString;
+    private String sentString;
     private String type;
     private final StringProperty numberProperty;
     private final StringProperty typeProperty;
@@ -109,11 +111,15 @@ public abstract class SmsHandy {
      * Outputs a list of all sent SMS messages to the console.
      */
     public void listSent() {
-        System.out.println("Sent messages:");
-        System.out.println("------------------------------------------");
+        //System.out.println("Sent messages:");
+        sentString += "Sent messages:";
+        //System.out.println("------------------------------------------");
+        sentString += "------------------------------------------";
         sent.forEach(message -> {
-            System.out.println(message);
-            System.out.println("------------------------------------------");
+            //System.out.println(message);
+            sentString += message;
+            sentString += "------------------------------------------";
+            //System.out.println("------------------------------------------");
         });
     }
 
@@ -121,11 +127,15 @@ public abstract class SmsHandy {
      * Outputs a list of all received SMS messages to the console.
      */
     public void listReceived() {
-        System.out.println("Received messages:");
-        System.out.println("------------------------------------------");
+        //System.out.println("Received messages:");
+        receivedString += "Received messages:";
+        //System.out.println("------------------------------------------");
+        receivedString += "------------------------------------------";
         received.forEach(message -> {
-            System.out.println(message);
-            System.out.println("------------------------------------------");
+            //System.out.println(message);
+            receivedString += message;
+            //System.out.println("------------------------------------------");
+            receivedString += "------------------------------------------";
         });
     }
 
