@@ -1,5 +1,8 @@
 package smsHandy.model;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.*;
 
 /**
@@ -11,8 +14,10 @@ public class Provider {
     private Set<SmsHandy> subscribers;
     private static List<Provider> providerList = new ArrayList<>();
     private String name;
+    private final StringProperty nameProperty;
     public Provider(String name) {
         this.name = name;
+        nameProperty = new SimpleStringProperty(name);
         credits = new HashMap<>();
         subscribers = new HashSet<>();
         providerList.add(this);
@@ -126,8 +131,13 @@ public class Provider {
     public String getName() {
         return name;
     }
+    //TODO change setName
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public StringProperty getNameProperty() {
+        return nameProperty;
     }
 }
