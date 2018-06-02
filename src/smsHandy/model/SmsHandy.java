@@ -1,5 +1,8 @@
 package smsHandy.model;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,18 +16,27 @@ public abstract class SmsHandy {
     private Provider provider;
     private List<Message> received;
     private List<Message> sent;
+    private String type;
+    private final StringProperty numberProperty;
+    private final StringProperty typeProperty;
     /**
      * Constructor for objects of class SmsHandy.
      * @param number the mobile phone number
      * @param provider the provider instance
      */
     public SmsHandy(String number, Provider provider) throws Exception {
-        
         isNumber(number);
         this.number = number;
+        this.numberProperty = new SimpleStringProperty(number);
         this.provider = provider;
         received = new ArrayList<>();
         sent = new ArrayList<>();
+        if (this instanceof PrepaidSmsHandy) {
+            type = "Prepaid";
+        } else {
+            type = "Tariff plan";
+        }
+        this.typeProperty = new SimpleStringProperty(type);
         provider.register(this);
     }
     /**
@@ -135,5 +147,18 @@ public abstract class SmsHandy {
 
     public List<Message> getSent() {
         return sent;
+    }
+
+    public StringProperty getNumberProperty() {
+        return numberProperty;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+
+    public StringProperty getTypeProperty() {
+        return typeProperty;
     }
 }

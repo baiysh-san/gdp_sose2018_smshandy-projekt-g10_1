@@ -1,5 +1,6 @@
 package smsHandy.view;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +11,9 @@ import javafx.stage.Stage;
 import smsHandy.MainApp;
 import smsHandy.model.Provider;
 import javafx.scene.control.TableView;
+import smsHandy.model.SmsHandy;
 
+import javafx.scene.text.Text;
 import java.io.IOException;
 
 public class SMS_HandyOverviewController {
@@ -19,6 +22,18 @@ public class SMS_HandyOverviewController {
     @FXML
     private TableColumn<Provider, String> providerNameColumn;
 
+    @FXML
+    private TableView<SmsHandy> smsHandyTableView;
+    @FXML
+    private TableColumn<SmsHandy, String> handyNumberColumn;
+    @FXML
+    private TableColumn<SmsHandy, String> handyTypeColumn;
+    @FXML
+    private Text currentProviderText;
+    @FXML
+    private Text numberOfHandysText;
+
+
     private MainApp mainApp;
     public SMS_HandyOverviewController() {
 
@@ -26,11 +41,21 @@ public class SMS_HandyOverviewController {
     @FXML
     private void initialize() {
         providerNameColumn.setCellValueFactory(cellValue -> cellValue.getValue().getNameProperty());
+        handyNumberColumn.setCellValueFactory(cellValue -> cellValue.getValue().getNumberProperty());
+        handyTypeColumn.setCellValueFactory(cellValue -> cellValue.getValue().getTypeProperty());
+        providerTableView.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showHandysOfCurrentProvider(newValue));
+
     }
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+    }
+    public void setSettings() {
         providerTableView.setItems(mainApp.getProviders());
+        smsHandyTableView.setItems(mainApp.getHandies());
+        numberOfHandysText.setText(getNumberOfAllHandys());
+
     }
     @FXML
     private void handleNewProviderButton() {
@@ -47,5 +72,12 @@ public class SMS_HandyOverviewController {
             e.printStackTrace();
         }
     }
-
+    private String getNumberOfAllHandys() {
+        return String.valueOf(mainApp.getHandies().size());
+    }
+    private void showHandysOfCurrentProvider(Provider provider) {
+        smsHandyTableView.setItems(mainApp.getHandysByProvider(provider));
+        currentProviderText.setText(provider.getName());
+        numberOfHandysText.setText(String.valueOf(mainApp.getHandysByProvider(provider).size()));
+    }
 }
