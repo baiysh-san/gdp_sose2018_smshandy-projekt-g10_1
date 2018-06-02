@@ -5,15 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import smsHandy.MainApp;
-import smsHandy.model.Main;
 import smsHandy.model.Provider;
 import javafx.scene.control.TableView;
-import smsHandy.model.SmsHandy;
 
 import java.io.IOException;
 
@@ -22,9 +18,6 @@ public class SMS_HandyOverviewController {
     private TableView<Provider> providerTableView;
     @FXML
     private TableColumn<Provider, String> providerNameColumn;
-
-//    @FXML
-//    private TextField createProviderTextField;
 
     private MainApp mainApp;
     public SMS_HandyOverviewController() {
@@ -54,9 +47,5 @@ public class SMS_HandyOverviewController {
             e.printStackTrace();
         }
     }
-//    @FXML
-//    private void handleCreateProviderOKButton() {
-//        String providerName = createProviderTextField.getText();
-//        mainApp.getProviders().add(new Provider(providerName));
-//    }
+
 }
