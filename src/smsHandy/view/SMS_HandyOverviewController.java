@@ -1,11 +1,9 @@
 package smsHandy.view;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -20,6 +18,9 @@ import smsHandy.model.TariffPlanSmsHandy;
 
 import java.io.IOException;
 
+/**
+ * Controller of SMS_HandyOverviewController.fxml.
+ */
 public class SMS_HandyOverviewController {
     @FXML
     private TableView<Provider> providerTableView;
@@ -51,6 +52,10 @@ public class SMS_HandyOverviewController {
 
 
     private MainApp mainApp;
+
+    /**
+     * TODO
+     */
     @FXML
     private void initialize() {
         providerNameColumn.setCellValueFactory(cellValue -> cellValue.getValue().getNameProperty());
@@ -70,12 +75,15 @@ public class SMS_HandyOverviewController {
                         showEmptyInfo();
                     }
                 });
-
     }
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
+
+    /**
+     * Fills providerTableView, smsHandyTableView with initial data.
+     */
     public void setSettings() {
         providerTableView.setItems(mainApp.getProviders());
         smsHandyTableView.setItems(mainApp.getHandies());
@@ -83,6 +91,10 @@ public class SMS_HandyOverviewController {
         showEmptyInfo();
 
     }
+
+    /**
+     * Reaction to a newProviderButton click.
+     */
     @FXML
     private void handleNewProviderButton() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CreateProvider.fxml"));
@@ -100,6 +112,10 @@ public class SMS_HandyOverviewController {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Reaction to a newHandyButton click.
+     */
     @FXML
     private void handleNewHandyButton() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CreateSMSHandy.fxml"));
@@ -118,6 +134,9 @@ public class SMS_HandyOverviewController {
             e.printStackTrace();
         }
     }
+    /**
+     * Reaction to a changeProviderButton click.
+     */
     @FXML
     private void handleChangeProviderButton() {
         int selectedIndex = smsHandyTableView.getSelectionModel().getSelectedIndex();
@@ -141,7 +160,9 @@ public class SMS_HandyOverviewController {
             mainApp.showAlert("SMS-Handy is not selected", "Please select SMS-Handy");
         }
     }
-
+    /**
+     * Reaction to a deleteProviderButton click.
+     */
     @FXML
     private void handleDeleteProviderButton() {
         int selectedIndex = providerTableView.getSelectionModel().getSelectedIndex();
@@ -155,6 +176,9 @@ public class SMS_HandyOverviewController {
             mainApp.showAlert("Provider is not selected!", "Please select Provider!");
         }
     }
+    /**
+     * Reaction to a deleteHandyButton click.
+     */
     @FXML
     private void handleDeleteHandyButton() {
         int selectedIndex = smsHandyTableView.getSelectionModel().getSelectedIndex();
@@ -170,6 +194,9 @@ public class SMS_HandyOverviewController {
             mainApp.showAlert("SMS-Handy is not selected", "Please select SMS-Handy");
         }
     }
+    /**
+     * Reaction to a inboxButton click.
+     */
     @FXML
     private void handleInboxButton() {
         int selectedIndex = smsHandyTableView.getSelectionModel().getSelectedIndex();
@@ -196,14 +223,27 @@ public class SMS_HandyOverviewController {
         }
     }
 
+    /**
+     * Returns number (Anzahl) of all SMS-Handys.
+     * @return number (Anzahl) of all SMS-Handys.
+     */
     private String getNumberOfAllHandys() {
         return String.valueOf(mainApp.getHandies().size());
     }
+
+    /**
+     *  Shows handys of the provider, we have given.
+     * @param provider which list of handys we want to show.
+     */
     private void showHandysOfCurrentProvider(Provider provider) {
         smsHandyTableView.setItems(mainApp.getHandysByProvider(provider));
         currentProviderText.setText(provider.getName());
         numberOfHandysText.setText(String.valueOf(mainApp.getHandysByProvider(provider).size()));
     }
+
+    /**
+     * Make all elements empty of AnchorPane that shows info about Sms-Handy.
+     */
     private void showEmptyInfo() {
         textNumber.setText("");
         textTarif.setText("");
@@ -212,6 +252,11 @@ public class SMS_HandyOverviewController {
         typeOfBalance.setText("");
         tariff.setText("");
     }
+
+    /**
+     * Shows info of SMS-Handy, we have given.
+     * @param smsHandy which info we want to show.
+     */
     private void showInfoOfCurrentHandy(SmsHandy smsHandy) {
         tariff.setText("Tariff:");
         textNumber.setText(smsHandy.getNumber());
@@ -229,6 +274,10 @@ public class SMS_HandyOverviewController {
         }
 
     }
+
+    /**
+     * Shows all SMS-Handys.
+     */
     @FXML
     private void showAllHandys() {
         smsHandyTableView.setItems(mainApp.getHandies());
