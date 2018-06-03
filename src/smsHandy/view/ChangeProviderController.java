@@ -10,6 +10,9 @@ import smsHandy.MainApp;
 import smsHandy.model.Provider;
 import smsHandy.model.SmsHandy;
 
+/**
+ * Controller of ChangeProvider.fxml.
+  */
 public class ChangeProviderController {
     @FXML
     private Text numberText;
@@ -19,6 +22,11 @@ public class ChangeProviderController {
     private MenuButton providerMenu;
     private MainApp mainApp;
     private SmsHandy smsHandy;
+
+    /**
+     * This method fills numberText, providerMenu with actual data.
+     * @param smsHandy
+     */
     public void setSettings(SmsHandy smsHandy) {
         this.smsHandy = smsHandy;
         numberText.setText(smsHandy.getNumber());
@@ -27,6 +35,10 @@ public class ChangeProviderController {
         mainApp.getProviders().forEach(provider -> providerMenu.getItems().add(new MenuItem(provider.getName())));
         providerMenu.getItems().forEach(menuItem -> menuItem.setOnAction(event -> providerMenu.setText(menuItem.getText())));
     }
+
+    /**
+     * Reaction to an OK button.
+     */
     @FXML
     private void handleOKButton() {
         Provider provider = null;
@@ -38,10 +50,18 @@ public class ChangeProviderController {
         smsHandy.changeProvider(provider);
         closeWindow();
     }
+
+    /**
+     * Reaction to a cancel button.
+     */
     @FXML
     private void handleCancelButton() {
         closeWindow();
     }
+
+    /**
+     * Closes window.
+     */
     private void closeWindow() {
         Stage stage = (Stage) okButton.getScene().getWindow();
         stage.close();
