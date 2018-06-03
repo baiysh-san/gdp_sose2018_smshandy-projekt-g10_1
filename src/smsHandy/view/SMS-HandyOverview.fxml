@@ -59,7 +59,7 @@
                   <Font size="17.0" />
                </font>
             </Text>
-            <Text layoutX="5.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account balance:" />
+            <Text fx:id="typeOfBalance" layoutX="5.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account balance:" />
             <Text fx:id="textBalance" layoutX="128.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Button layoutX="176.0" layoutY="98.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Deposit" />
             <Button layoutX="5.0" layoutY="330.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="INBOX" />

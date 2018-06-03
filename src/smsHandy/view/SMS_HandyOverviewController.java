@@ -15,6 +15,8 @@ import javafx.scene.control.TableView;
 import smsHandy.model.SmsHandy;
 
 import javafx.scene.text.Text;
+import smsHandy.model.TariffPlanSmsHandy;
+
 import java.io.IOException;
 
 public class SMS_HandyOverviewController {
@@ -39,6 +41,8 @@ public class SMS_HandyOverviewController {
     private Text textTarif;
     @FXML
     private Text textProvider;
+    @FXML
+    private Text typeOfBalance;
     @FXML
     private Text textBalance;
 
@@ -151,8 +155,17 @@ public class SMS_HandyOverviewController {
         textNumber.setText(smsHandy.getNumber());
         textTarif.setText(smsHandy.getType());
         textProvider.setText(smsHandy.getProvider().getName());
-        //TODO TODO TODO!!!
-        textBalance.setText("TODO");
+
+        if (smsHandy.getType().equals("Tariff plan")) {
+            TariffPlanSmsHandy tariffPlanSmsHandy = (TariffPlanSmsHandy) smsHandy;
+            textBalance.setText(String.valueOf(tariffPlanSmsHandy.getRemainingFreeSms()));
+            typeOfBalance.setText("Remaining free SMS:");
+        }
+        if (smsHandy.getType().equals("Prepaid")) {
+            typeOfBalance.setText("Account balance:");
+            textBalance.setText(String.valueOf(smsHandy.getProvider().getCreditForSmsHandy(smsHandy.getNumber())));
+        }
+
     }
     @FXML
     private void showAllHandys() {
