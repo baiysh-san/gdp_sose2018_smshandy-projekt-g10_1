@@ -25,14 +25,14 @@ public class CreateProviderController {
         if (!providerName.equals("")) {
             for (Provider provider: mainApp.getProviders()) {
                 if (provider.getName().equals(providerName)) {
-                    showAlert("Provider with this name already exists!", "");
+                    mainApp.showAlert("Provider with this name already exists!", "");
                     return;
                 }
             }
             mainApp.getProviders().add(new Provider(providerName));
             closeWindow();
         } else {
-            showAlert("No provider name given!", "Please give provider name.");
+            mainApp.showAlert("No provider name given!", "Please give provider name.");
         }
 
     }
@@ -43,13 +43,5 @@ public class CreateProviderController {
     private void closeWindow() {
         Stage stage = (Stage) okButton.getScene().getWindow();
         stage.close();
-    }
-
-    private void showAlert(String headerText, String contentText) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.initOwner(mainApp.getStage());
-        alert.setHeaderText(headerText);
-        alert.setContentText(contentText);
-        alert.showAndWait();
     }
 }

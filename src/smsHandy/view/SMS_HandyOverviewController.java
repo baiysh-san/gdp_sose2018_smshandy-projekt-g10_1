@@ -138,7 +138,7 @@ public class SMS_HandyOverviewController {
                 e.printStackTrace();
             }
         } else {
-            showAlert("SMS-Handy is not selected", "Please select SMS-Handy");
+            mainApp.showAlert("SMS-Handy is not selected", "Please select SMS-Handy");
         }
     }
 
@@ -152,7 +152,7 @@ public class SMS_HandyOverviewController {
             provider.removeAllHandys();
             mainApp.getHandies().removeIf(handy -> handy.getProvider() == provider);
         } else {
-            showAlert("Provider is not selected!", "Please select Provider!");
+            mainApp.showAlert("Provider is not selected!", "Please select Provider!");
         }
     }
     @FXML
@@ -167,7 +167,7 @@ public class SMS_HandyOverviewController {
             });
             mainApp.getHandies().remove(smsHandy);
         } else {
-            showAlert("SMS-Handy is not selected", "Please select SMS-Handy");
+            mainApp.showAlert("SMS-Handy is not selected", "Please select SMS-Handy");
         }
     }
 
@@ -210,11 +210,5 @@ public class SMS_HandyOverviewController {
         currentProviderText.setText("All");
         numberOfHandysText.setText(getNumberOfAllHandys());
     }
-    private void showAlert(String headerText, String contentText) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.initOwner(mainApp.getStage());
-        alert.setHeaderText(headerText);
-        alert.setContentText(contentText);
-        alert.showAndWait();
-    }
+
 }

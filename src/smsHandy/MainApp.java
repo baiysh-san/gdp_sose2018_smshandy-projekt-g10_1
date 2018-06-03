@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -19,7 +20,7 @@ import smsHandy.model.TariffPlanSmsHandy;
 import smsHandy.view.SMS_HandyOverviewController;
 
 public class MainApp extends Application{
-    private Stage stage; 
+    private Stage stage;
     private BorderPane rootPane;
     private ObservableList<Provider> providers = FXCollections.observableArrayList();
     private ObservableList<SmsHandy> handies = FXCollections.observableArrayList();
@@ -141,6 +142,13 @@ public class MainApp extends Application{
                 providerHandys.add(smsHandy);
         });
         return providerHandys;
+    }
+    public void showAlert(String headerText, String contentText) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(stage);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
     }
 
 }

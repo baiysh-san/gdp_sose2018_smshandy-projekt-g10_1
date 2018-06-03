@@ -48,7 +48,7 @@ public class CreateSMSHandyController {
         if (!number.equals("")) {
             for (SmsHandy handy: mainApp.getHandies()) {
                 if (handy.getNumber().equals(number)) {
-                    showAlert("SMS-Handy with this number already exists!", "");
+                    mainApp.showAlert("SMS-Handy with this number already exists!", "");
                     return;
                 }
             }
@@ -72,15 +72,15 @@ public class CreateSMSHandyController {
                         }
 
                     } catch (Exception e) {
-                        showAlert("Wrong number format!", "Please input correct number!");
+                        mainApp.showAlert("Wrong number format!", "Please input correct number!");
                     }
 
             } else {
-                showAlert("Provider is not chosen!", "Please choose provider.");
+                mainApp.showAlert("Provider is not chosen!", "Please choose provider.");
             }
 
         } else {
-            showAlert("No number given!", "Please give number.");
+            mainApp.showAlert("No number given!", "Please give number.");
         }
 
     }
@@ -91,13 +91,5 @@ public class CreateSMSHandyController {
     private void closeWindow() {
         Stage stage = (Stage) okButton.getScene().getWindow();
         stage.close();
-    }
-
-    private void showAlert(String headerText, String contentText) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.initOwner(mainApp.getStage());
-        alert.setHeaderText(headerText);
-        alert.setContentText(contentText);
-        alert.showAndWait();
     }
 }

@@ -7,20 +7,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="147.0" prefWidth="245.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smsHandy.view.ChangeProviderController">
+<AnchorPane prefHeight="157.0" prefWidth="274.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smsHandy.view.ChangeProviderController">
    <children>
-      <Text fx:id="numberText" layoutX="24.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00000">
+      <Text fx:id="numberText" layoutX="34.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00000">
          <font>
             <Font size="21.0" />
          </font>
       </Text>
-      <MenuButton fx:id="providerMenu" layoutX="24.0" layoutY="63.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="198.0" text="MenuButton">
+      <MenuButton fx:id="providerMenu" layoutX="34.0" layoutY="61.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="198.0" text="MenuButton">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
       </MenuButton>
-      <Button fx:id="okButton" layoutX="177.0" layoutY="112.0" mnemonicParsing="false" onAction="#handleOKButton" prefHeight="25.0" prefWidth="54.0" text="OK" />
-      <Button layoutX="116.0" layoutY="112.0" mnemonicParsing="false" onAction="#handleCancelButton" text="Cancel" />
+      <Button fx:id="okButton" layoutX="198.0" layoutY="112.0" mnemonicParsing="false" onAction="#handleOKButton" prefHeight="25.0" prefWidth="54.0" text="OK" />
+      <Button layoutX="127.0" layoutY="112.0" mnemonicParsing="false" onAction="#handleCancelButton" text="Cancel" />
    </children>
 </AnchorPane>
