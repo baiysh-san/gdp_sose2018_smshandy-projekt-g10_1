@@ -69,7 +69,15 @@ public class Provider {
             subscribers.add(smsHandy);
         }
     }
-    
+    public void registerFromAnotherProvider(SmsHandy smsHandy, int credits) throws Exception {
+        if(this.credits.containsKey(smsHandy.getNumber())) {
+            throw new Exception("This phone is already registered!");
+        } else {
+            this.credits.put(smsHandy.getNumber(), credits);
+            subscribers.add(smsHandy);
+        }
+    }
+
     /**
      * Loads credit on a cell phone. 
      * This is necessary because the mobile phone cannot 
@@ -150,7 +158,7 @@ public class Provider {
     }
     public void removeHandy(SmsHandy smsHandy) {
         subscribers.remove(smsHandy);
-        credits.remove(smsHandy);
+        credits.remove(smsHandy.getNumber());
     }
     public boolean hasHandy(SmsHandy smsHandy) {
         for (SmsHandy handy: subscribers) {

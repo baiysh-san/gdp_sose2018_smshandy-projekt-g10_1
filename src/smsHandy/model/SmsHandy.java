@@ -147,9 +147,9 @@ public abstract class SmsHandy {
         return provider;
     }
 
-    public void setProvider(Provider provider) {
-        this.provider = provider;
-    }
+//    public void setProvider(Provider provider) {
+//        this.provider = provider;
+//    }
 
     public List<Message> getReceived() {
         return received;
@@ -176,5 +176,17 @@ public abstract class SmsHandy {
     }
     public String getSentString() {
         return sentString;
+    }
+    public void changeProvider(Provider newProvider) {
+        if (this.provider != newProvider) {
+            try {
+                newProvider.registerFromAnotherProvider(this, this.provider.getCreditForSmsHandy(getNumber()));
+                this.provider.removeHandy(this);
+                this.provider = newProvider;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 }

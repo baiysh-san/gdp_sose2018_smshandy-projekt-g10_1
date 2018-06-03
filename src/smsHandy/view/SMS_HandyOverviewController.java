@@ -38,6 +38,8 @@ public class SMS_HandyOverviewController {
     @FXML
     private Text textNumber;
     @FXML
+    private Text tariff;
+    @FXML
     private Text textTarif;
     @FXML
     private Text textProvider;
@@ -65,8 +67,10 @@ public class SMS_HandyOverviewController {
                 });
         smsHandyTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue)->{
-                    if (newValue!=null) {
+                    if (newValue != null) {
                         showInfoOfCurrentHandy(newValue);
+                    } else {
+                        showEmptyInfo();
                     }
                 });
 
@@ -79,6 +83,7 @@ public class SMS_HandyOverviewController {
         providerTableView.setItems(mainApp.getProviders());
         smsHandyTableView.setItems(mainApp.getHandies());
         numberOfHandysText.setText(getNumberOfAllHandys());
+        showEmptyInfo();
 
     }
     @FXML
@@ -115,6 +120,29 @@ public class SMS_HandyOverviewController {
         }
     }
     @FXML
+    private void handleChangeProviderButton() {
+        int selectedIndex = smsHandyTableView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChangeProvider.fxml"));
+            try {
+                Parent root = fxmlLoader.load();
+                ChangeProviderController controller = fxmlLoader.getController();
+                controller.setMainApp(mainApp);
+                controller.setSettings(smsHandyTableView.getSelectionModel().getSelectedItem());
+                Stage stage = new Stage();
+                stage.setTitle("Change provider");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            showAlert("SMS-Handy is not selected", "Please select SMS-Handy");
+        }
+    }
+
+    @FXML
     private void handleDeleteProviderButton() {
         int selectedIndex = providerTableView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
@@ -142,6 +170,7 @@ public class SMS_HandyOverviewController {
             showAlert("SMS-Handy is not selected", "Please select SMS-Handy");
         }
     }
+
     private String getNumberOfAllHandys() {
         return String.valueOf(mainApp.getHandies().size());
     }
@@ -150,8 +179,16 @@ public class SMS_HandyOverviewController {
         currentProviderText.setText(provider.getName());
         numberOfHandysText.setText(String.valueOf(mainApp.getHandysByProvider(provider).size()));
     }
+    private void showEmptyInfo() {
+        textNumber.setText("");
+        textTarif.setText("");
+        textProvider.setText("");
+        textBalance.setText("");
+        typeOfBalance.setText("");
+        tariff.setText("");
+    }
     private void showInfoOfCurrentHandy(SmsHandy smsHandy) {
-        
+        tariff.setText("Tariff:");
         textNumber.setText(smsHandy.getNumber());
         textTarif.setText(smsHandy.getType());
         textProvider.setText(smsHandy.getProvider().getName());
