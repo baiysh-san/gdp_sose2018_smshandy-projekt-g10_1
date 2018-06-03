@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 import smsHandy.MainApp;
 import smsHandy.model.Provider;
 
+/**
+ * Controller of CreateProvider.fxml.
+ */
 public class CreateProviderController {
     @FXML
     private TextField nameField;
@@ -19,6 +22,10 @@ public class CreateProviderController {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
+
+    /**
+     * Reaction to an OK button.
+     */
     @FXML
     private void handleOKButton() {
         String providerName = nameField.getText().trim();
@@ -34,12 +41,18 @@ public class CreateProviderController {
         } else {
             mainApp.showAlert("No provider name given!", "Please give provider name.");
         }
-
     }
+
+    /**
+     * Reaction to a cancel button.
+     */
     @FXML
     private void handleCancelButton() {
         closeWindow();
     }
+    /**
+     * Closes window.
+     */
     private void closeWindow() {
         Stage stage = (Stage) okButton.getScene().getWindow();
         stage.close();
