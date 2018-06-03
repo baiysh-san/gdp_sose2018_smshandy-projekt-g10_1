@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import smsHandy.MainApp;
 import smsHandy.model.Provider;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import smsHandy.model.SmsHandy;
 
 import javafx.scene.text.Text;
@@ -90,6 +91,7 @@ public class SMS_HandyOverviewController {
             CreateProviderController controller = fxmlLoader.getController();
             controller.setMainApp(mainApp);
             Stage stage = new Stage();
+            stage.getIcons().add(new Image("file:resources/images/phone.png"));
             stage.setTitle("Create provider");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
@@ -108,6 +110,7 @@ public class SMS_HandyOverviewController {
             controller.setSettings();
             Stage stage = new Stage();
             stage.setTitle("Create SMS-Handy");
+            stage.getIcons().add(new Image("file:resources/images/phone.png"));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.show();
@@ -127,6 +130,7 @@ public class SMS_HandyOverviewController {
                 controller.setSettings(smsHandyTableView.getSelectionModel().getSelectedItem());
                 Stage stage = new Stage();
                 stage.setTitle("Change provider");
+                stage.getIcons().add(new Image("file:resources/images/phone.png"));
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.setScene(new Scene(root));
                 stage.show();

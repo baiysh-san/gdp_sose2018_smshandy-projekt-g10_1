@@ -44,7 +44,7 @@
       <Button layoutX="33.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleDeleteProviderButton" text="DELETE" />
       <AnchorPane layoutX="413.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="369.0" prefWidth="252.0">
          <children>
-            <Text fx:id="textNumber" layoutX="16.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NUMBER" wrappingWidth="77.123046875">
+            <Text fx:id="textNumber" layoutX="19.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NUMBER" wrappingWidth="213.0000039935112">
                <font>
                   <Font size="18.0" />
                </font>
