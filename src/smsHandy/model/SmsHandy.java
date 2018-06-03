@@ -127,14 +127,16 @@ public abstract class SmsHandy {
      * Outputs a list of all received SMS messages to the console.
      */
     public void listReceived() {
-        //System.out.println("Received messages:");
-        receivedString += "Received messages:";
-        //System.out.println("------------------------------------------");
+        
+        if(receivedString == null) {
+            receivedString = "Received messages:";
+        } else {
+            receivedString += "Received messages:";
+        }
+        
         receivedString += "------------------------------------------";
         received.forEach(message -> {
-            //System.out.println(message);
-            receivedString += message;
-            //System.out.println("------------------------------------------");
+            receivedString += message.getFrom();
             receivedString += "------------------------------------------";
         });
     }

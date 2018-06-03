@@ -45,6 +45,8 @@ public class MainApp extends Application{
         SmsHandy handy1 = new PrepaidSmsHandy("0312", nettoCOM);
         SmsHandy handy2 = new PrepaidSmsHandy("0313", nettoCOM);
         SmsHandy handy3 = new TariffPlanSmsHandy("0555", beeline);
+        handy1.sendSms("0555", "LALALAddddddddddddddddddddddddddddddddddddddddddddd\n\nsdfsdf");
+        handy2.sendSms("0555", "LALALA2");
 
         handies.add(handy1);
         handies.add(handy2);
