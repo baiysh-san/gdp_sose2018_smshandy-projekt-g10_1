@@ -19,13 +19,21 @@ import smsHandy.model.SmsHandy;
 import smsHandy.model.TariffPlanSmsHandy;
 import smsHandy.view.SMS_HandyOverviewController;
 
+/**
+ * Main class of program.
+ */
 public class MainApp extends Application{
     private Stage stage;
     private BorderPane rootPane;
     private ObservableList<Provider> providers = FXCollections.observableArrayList();
     private ObservableList<SmsHandy> handies = FXCollections.observableArrayList();
+
+    /**
+     * Constructor of MainApp. Here we create providers and handies.
+     * Providers and handies must be added to relevant lists.
+     * @throws Exception
+     */
     public MainApp() throws Exception {
-        
         Provider nettoCOM = new Provider("nettoCOM");
         Provider o2 = new Provider("O2");
         Provider beeline = new Provider("Beeline");
@@ -43,20 +51,24 @@ public class MainApp extends Application{
         handies.add(handy3);
     }
 
+    /**
+     * TODO
+     * @param stage
+     * @throws Exception
+     */
     @Override
     public void start(Stage stage) throws Exception {
-        // TODO Auto-generated method stub
         this.stage = stage;
         this.stage.setTitle("SMS-Handy-App");
         this.stage.setResizable(false);
         this.stage.getIcons().add(new Image("file:resources/images/phone.png"));
         showRootPanel();
         showSmsHandyOverview();
-        //showMessageOverview();
-        //showProviderOverview();
-        //showHandyOverview();
     }
-    
+
+    /**
+     * This method shows our RootPanel - RootPanel.fxml.
+     */
     public void showRootPanel() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -64,13 +76,18 @@ public class MainApp extends Application{
             rootPane = loader.load();
             Scene scene  = new Scene(rootPane, 650,400);
             stage.setScene(scene);
-            
             stage.show();
-            
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    /**
+     * This method shows SMS-HandyOverview.fxml.
+     * After we loaded fxml file, we added it to rootPanel;
+     * Then we loaded controller of SMS-HandyOverview.
+     * Also we set MainApp and 'Settings' to controller.
+     * The method setSettings of SMS_HandyOverviewController sets initial data to tableViews.
+     */
     public void showSmsHandyOverview() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -86,55 +103,19 @@ public class MainApp extends Application{
         }
     }
 
-//    public void showProviderOverview() {
-//        try {
-//            FXMLLoader loader = new FXMLLoader();
-//            loader.setLocation(MainApp.class.getResource("view/ProviderOverview.fxml"));
-//            AnchorPane providerOverview = loader.load();
-//            SMS_HandyOverviewController rootController = loader.getController();
-//            rootController.setMainApp(this);
-//            rootPane.setLeft(providerOverview);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    public void showHandyOverview() {
-//        try {
-//            FXMLLoader loader = new FXMLLoader();
-//            loader.setLocation(MainApp.class.getResource("view/HandyOverview.fxml"));
-//            AnchorPane handyOverview = loader.load();
-//            rootPane.setCenter(handyOverview);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    public void showMessageOverview() {
-//        try {
-//            FXMLLoader loader = new FXMLLoader();
-//            loader.setLocation(MainApp.class.getResource("view/MessageOverview.fxml"));
-//            AnchorPane messageOverview = loader.load();
-//            rootPane.setRight(messageOverview);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-    public ObservableList<Provider> getProviders() {
-        return providers;
-    }
-
-    public ObservableList<SmsHandy> getHandies() {
-        return handies;
-    }
-
-    public Stage getStage() {
-        return stage;
-    }
-
+    /**
+     * Main method of the program.
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }
+
+    /**
+     * Returns ObservableList of SmsHandys that relate to provider, we have given.
+     * @param provider object of provider, which smsHandys we want to receive.
+     * @return list of smsHandys that relate to provider, we have given.
+     */
     public ObservableList<SmsHandy> getHandysByProvider(Provider provider) {
         ObservableList<SmsHandy> providerHandys = FXCollections.observableArrayList();
         handies.forEach(smsHandy -> {
@@ -143,12 +124,25 @@ public class MainApp extends Application{
         });
         return providerHandys;
     }
+
+    /**
+     * Shows alert window.
+     * @param headerText e.g. SMS-Handy is not selected
+     * @param contentText e.g. Please select SMS-Handy
+     */
     public void showAlert(String headerText, String contentText) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.initOwner(stage);
         alert.setHeaderText(headerText);
         alert.setContentText(contentText);
         alert.showAndWait();
+    }
+    public ObservableList<Provider> getProviders() {
+        return providers;
+    }
+
+    public ObservableList<SmsHandy> getHandies() {
+        return handies;
     }
 
 }

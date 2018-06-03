@@ -50,10 +50,6 @@ public class SMS_HandyOverviewController {
 
 
     private MainApp mainApp;
-    public SMS_HandyOverviewController() {
-
-    }
-    
     @FXML
     private void initialize() {
         providerNameColumn.setCellValueFactory(cellValue -> cellValue.getValue().getNameProperty());
