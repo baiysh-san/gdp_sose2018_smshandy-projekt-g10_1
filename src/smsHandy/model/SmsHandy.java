@@ -171,4 +171,10 @@ public abstract class SmsHandy {
     public StringProperty getTypeProperty() {
         return typeProperty;
     }
+    public String getReceivedString() {
+        return receivedString;
+    }
+    public String getSentString() {
+        return sentString;
+    }
 }
