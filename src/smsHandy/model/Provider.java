@@ -15,6 +15,11 @@ public class Provider {
     private static List<Provider> providerList = new ArrayList<>();
     private String name;
     private final StringProperty nameProperty;
+
+    /**
+     * Constructor of Provider.
+     * @param name
+     */
     public Provider(String name) {
         this.name = name;
         nameProperty = new SimpleStringProperty(name);
@@ -69,6 +74,13 @@ public class Provider {
             subscribers.add(smsHandy);
         }
     }
+
+    /**
+     * Register a SmsHandy to this provider.
+     * @param smsHandy we want to register.
+     * @param credits of smsHandy.
+     * @throws Exception
+     */
     public void registerFromAnotherProvider(SmsHandy smsHandy, int credits) throws Exception {
         if(this.credits.containsKey(smsHandy.getNumber())) {
             throw new Exception("This phone is already registered!");
@@ -136,13 +148,38 @@ public class Provider {
        return null;
     }
 
+    /**
+     * Removes all handys of this provider.
+     */
+    public void removeAllHandys() {
+        subscribers.clear();
+        credits.clear();
+    }
+
+    /**
+     * Removes one handy of this provider.
+     * @param smsHandy we want to remove from provider.
+     */
+    public void removeHandy(SmsHandy smsHandy) {
+        subscribers.remove(smsHandy);
+        credits.remove(smsHandy.getNumber());
+    }
+
+    /**
+     * Checks if the provider has a smsHandy.
+     * @param smsHandy to check.
+     * @return true if provider has smsHandy, false if haven't.
+     */
+    public boolean hasHandy(SmsHandy smsHandy) {
+        for (SmsHandy handy: subscribers) {
+            if (handy == smsHandy) {
+                return true;
+            }
+        }
+        return false;
+    }
     public String getName() {
         return name;
-    }
-    //TODO change setName
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public StringProperty getNameProperty() {
@@ -151,21 +188,5 @@ public class Provider {
 
     public static List<Provider> getProviderList() {
         return providerList;
-    }
-    public void removeAllHandys() {
-        subscribers.clear();
-        credits.clear();
-    }
-    public void removeHandy(SmsHandy smsHandy) {
-        subscribers.remove(smsHandy);
-        credits.remove(smsHandy.getNumber());
-    }
-    public boolean hasHandy(SmsHandy smsHandy) {
-        for (SmsHandy handy: subscribers) {
-            if (handy == smsHandy) {
-                return true;
-            }
-        }
-        return false;
     }
 }
