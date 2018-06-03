@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smsHandy.view.MessageInfoController">
+   <children>
+      <AnchorPane layoutY="6.0" prefHeight="504.0" prefWidth="434.0">
+         <children>
+            <Text layoutX="18.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text fx:id="fromText" layoutX="77.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="285.76708984375">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="17.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text fx:id="toText" layoutX="78.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="296.4337463378906">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="15.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text fx:id="dateText" layoutX="79.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="168.45816040039062">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="contentArea" editable="false" layoutX="10.0" layoutY="108.0" prefHeight="339.0" prefWidth="409.0" />
+            <Button fx:id="cancelButton" layoutX="22.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleCacnelButton" text="Cancel" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
