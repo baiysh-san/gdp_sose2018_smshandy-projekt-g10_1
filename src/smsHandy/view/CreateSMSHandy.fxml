@@ -5,12 +5,12 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smsHandy.view.CreateSMSHandyController">
    <children>
       <AnchorPane prefHeight="225.0" prefWidth="365.0">
          <children>
@@ -19,24 +19,27 @@
                   <Font size="21.0" />
                </font>
             </Text>
-            <TextField layoutX="133.0" layoutY="17.0" prefHeight="25.0" prefWidth="194.0" />
+            <TextField fx:id="numberField" layoutX="133.0" layoutY="17.0" prefHeight="25.0" prefWidth="194.0" />
             <Text layoutX="14.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Provider" wrappingWidth="87.091796875">
                <font>
                   <Font size="20.0" />
                </font>
             </Text>
-            <SplitMenuButton layoutX="133.0" layoutY="54.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="194.0" text="Provider">
+            <SplitMenuButton fx:id="providerMenu" layoutX="133.0" layoutY="54.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="194.0" text="Provider">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
                 <MenuItem mnemonicParsing="false" text="Action 2" />
               </items>
             </SplitMenuButton>
-            <RadioButton layoutX="21.0" layoutY="129.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="112.0" text="Tariff">
+            <RadioButton fx:id="tariffRbutton" layoutX="21.0" layoutY="129.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="112.0" selected="true" text="Tariff">
                <font>
                   <Font size="20.0" />
                </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="planGroup" />
+               </toggleGroup>
             </RadioButton>
-            <RadioButton layoutX="222.0" layoutY="128.0" mnemonicParsing="false" text="Prepaid">
+            <RadioButton fx:id="prepaidRbutton" layoutX="222.0" layoutY="128.0" mnemonicParsing="false" text="Prepaid" toggleGroup="$planGroup">
                <font>
                   <Font size="22.0" />
                </font>
@@ -46,8 +49,8 @@
                   <Font size="20.0" />
                </font>
             </Text>
-            <Button layoutX="289.0" layoutY="186.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="54.0" text="OK" />
-            <Button layoutX="222.0" layoutY="186.0" mnemonicParsing="false" text="Cancel" />
+            <Button fx:id="okButton" layoutX="289.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleOKButton" prefHeight="25.0" prefWidth="54.0" text="OK" />
+            <Button layoutX="222.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleCancelButton" text="Cancel" />
          </children>
       </AnchorPane>
    </children>

@@ -61,7 +61,7 @@ public class SMS_HandyOverviewController {
                 });
         smsHandyTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue)->{
-                    if(newValue!=null) {
+                    if (newValue!=null) {
                         showInfoOfCurrentHandy(newValue);
                     }
                 });
@@ -88,6 +88,23 @@ public class SMS_HandyOverviewController {
             controller.setMainApp(mainApp);
             Stage stage = new Stage();
             stage.setTitle("Create provider");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void handleNewHandyButton() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CreateSMSHandy.fxml"));
+        try {
+            Parent root = fxmlLoader.load();
+            CreateSMSHandyController controller = fxmlLoader.getController();
+            controller.setMainApp(mainApp);
+            controller.setSettings();
+            Stage stage = new Stage();
+            stage.setTitle("Create SMS-Handy");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.show();
