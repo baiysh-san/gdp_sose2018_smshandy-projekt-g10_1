@@ -36,7 +36,7 @@
                </columns>
             </TableView>
             <Button layoutX="139.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleNewHandyButton" text="New" />
-            <Button layoutX="25.0" layoutY="330.0" mnemonicParsing="false" text="Delete" />
+            <Button layoutX="25.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleDeleteHandyButton" text="Delete" />
             <Button layoutX="84.0" layoutY="330.0" mnemonicParsing="false" onAction="#showAllHandys" prefHeight="25.0" prefWidth="45.0" text="All" />
          </children>
       </AnchorPane>

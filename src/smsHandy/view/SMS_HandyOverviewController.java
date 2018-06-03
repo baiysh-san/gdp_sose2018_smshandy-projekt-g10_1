@@ -65,8 +65,6 @@ public class SMS_HandyOverviewController {
                         showInfoOfCurrentHandy(newValue);
                     }
                 });
-                
-                
 
     }
 
@@ -124,7 +122,21 @@ public class SMS_HandyOverviewController {
         } else {
             showAlert("Provider is not selected!", "Please select Provider!");
         }
-
+    }
+    @FXML
+    private void handleDeleteHandyButton() {
+        int selectedIndex = smsHandyTableView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            SmsHandy smsHandy = smsHandyTableView.getSelectionModel().getSelectedItem();
+            mainApp.getProviders().forEach(provider -> {
+                if (provider.hasHandy(smsHandy)) {
+                    provider.removeHandy(smsHandy);
+                }
+            });
+            mainApp.getHandies().remove(smsHandy);
+        } else {
+            showAlert("SMS-Handy is not selected", "Please select SMS-Handy");
+        }
     }
     private String getNumberOfAllHandys() {
         return String.valueOf(mainApp.getHandies().size());

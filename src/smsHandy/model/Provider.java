@@ -148,4 +148,16 @@ public class Provider {
         subscribers.clear();
         credits.clear();
     }
+    public void removeHandy(SmsHandy smsHandy) {
+        subscribers.remove(smsHandy);
+        credits.remove(smsHandy);
+    }
+    public boolean hasHandy(SmsHandy smsHandy) {
+        for (SmsHandy handy: subscribers) {
+            if (handy == smsHandy) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
