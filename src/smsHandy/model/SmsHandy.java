@@ -149,10 +149,6 @@ public abstract class SmsHandy {
         return provider;
     }
 
-//    public void setProvider(Provider provider) {
-//        this.provider = provider;
-//    }
-
     public List<Message> getReceived() {
         return received;
     }
@@ -179,6 +175,11 @@ public abstract class SmsHandy {
     public String getSentString() {
         return sentString;
     }
+
+    /**
+     * Change provider of the SMS-Handy.
+     * @param newProvider
+     */
     public void changeProvider(Provider newProvider) {
         if (this.provider != newProvider) {
             try {
