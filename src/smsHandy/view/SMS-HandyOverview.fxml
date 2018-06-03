@@ -63,7 +63,7 @@
             <Text fx:id="textBalance" layoutX="128.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Button layoutX="176.0" layoutY="98.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Deposit" />
             <Button layoutX="5.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleInboxButton" prefHeight="25.0" prefWidth="59.0" text="INBOX" />
-            <Button layoutX="84.0" layoutY="331.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="SENT" />
+            <Button layoutX="84.0" layoutY="331.0" mnemonicParsing="false" onAction="#handleSentButton" prefHeight="25.0" prefWidth="61.0" text="SENT" />
             <Button layoutX="162.0" layoutY="331.0" mnemonicParsing="false" text="SEND SMS" />
             <Button layoutX="181.0" layoutY="67.0" mnemonicParsing="false" onAction="#handleChangeProviderButton" text="Change" />
             <Text fx:id="textTarif" layoutX="74.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0">

@@ -207,10 +207,35 @@ public class SMS_HandyOverviewController {
                 InboxController controller = fxmlLoader.getController();
                 SmsHandy handy =  smsHandyTableView.getSelectionModel().getSelectedItem();
                 handy.listReceived();
-                controller.setMainApp(mainApp);
+                //controller.setMainApp(mainApp);
                 controller.setSettings(handy);
                 Stage stage = new Stage();
                 stage.setTitle("Inbox");
+                stage.getIcons().add(new Image("file:resources/images/phone.png"));
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            mainApp.showAlert("SMS-Handy is not selected", "Please select SMS-Handy");
+        }
+    }
+    @FXML
+    private void handleSentButton() {
+        int selectedIndex = smsHandyTableView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SentOverview.fxml"));
+            try {
+                Parent root = fxmlLoader.load();
+                SentController controller = fxmlLoader.getController();
+                SmsHandy handy =  smsHandyTableView.getSelectionModel().getSelectedItem();
+                handy.listReceived();
+                //controller.setMainApp(mainApp);
+                controller.setSettings(handy);
+                Stage stage = new Stage();
+                stage.setTitle("Sent");
                 stage.getIcons().add(new Image("file:resources/images/phone.png"));
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.setScene(new Scene(root));

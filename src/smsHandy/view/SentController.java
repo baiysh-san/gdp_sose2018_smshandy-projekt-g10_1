@@ -1,34 +1,30 @@
 package smsHandy.view;
 
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import smsHandy.MainApp;
-import smsHandy.model.Message;
-import smsHandy.model.Provider;
-import smsHandy.model.SmsHandy;
-
 import java.io.IOException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import smsHandy.MainApp;
+import smsHandy.model.Message;
+import smsHandy.model.SmsHandy;
 
-public class InboxController {
+public class SentController {
     @FXML
-    private TableView <Message> inboxTableView;
+    private TableView <Message> sentTableView;
     @FXML
     private TableColumn<Message, String> contentColumn;
     @FXML
-    private TableColumn<Message, String> fromColumn;
+    private TableColumn<Message, String> toColumn;
     @FXML
     private TableColumn<Message, String> dateColumn;
     @FXML
@@ -41,25 +37,27 @@ public class InboxController {
     private MainApp mainApp;
     private SmsHandy smsHandy;
     
-    
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+    }
     public void setSettings(SmsHandy smsHandy) {
         this.smsHandy = smsHandy;
-        ObservableList<Message> messages = FXCollections.observableArrayList(smsHandy.getReceived());
-        inboxTableView.setItems(messages);
+        ObservableList<Message> messages = FXCollections.observableArrayList(smsHandy.getSent());
+        sentTableView.setItems(messages);
         contentColumn.setCellValueFactory(cellValue -> cellValue.getValue().getContentProperty());
-        fromColumn.setCellValueFactory(cellValue -> cellValue.getValue().getFromProperty());
+        toColumn.setCellValueFactory(cellValue -> cellValue.getValue().getToProperty());
         dateColumn.setCellValueFactory(cellValue -> cellValue.getValue().getDatePropery());
         
     }
     @FXML
     private void handleOpenButton() {
-        int selectedIndex = inboxTableView.getSelectionModel().getSelectedIndex();
+        int selectedIndex = sentTableView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MessageOverview.fxml"));
             try {
                 Parent root = fxmlLoader.load();
                 MessageInfoController controller = fxmlLoader.getController();
-                Message message =  inboxTableView.getSelectionModel().getSelectedItem();
+                Message message =  sentTableView.getSelectionModel().getSelectedItem();
                 controller.setSettings(message);
                 Stage stage = new Stage();
                 stage.setTitle("Message");
@@ -79,6 +77,4 @@ public class InboxController {
         Stage stage = (Stage) openButton.getScene().getWindow();
         stage.close();
     }
-    
-    
 }
