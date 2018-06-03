@@ -9,8 +9,9 @@ import smsHandy.model.Provider;
 import smsHandy.model.SmsHandy;
 import smsHandy.model.TariffPlanSmsHandy;
 
-import java.util.regex.Pattern;
-
+/**
+ * Controller of CreateSMSHandy.fxml.
+ */
 public class CreateSMSHandyController {
     @FXML
     private Button okButton;
@@ -30,6 +31,11 @@ public class CreateSMSHandyController {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
+
+    /**
+     * This method fills providerMenu with actual data.
+     * Sets userData to radio buttons.
+     */
     public void setSettings() {
         providerMenu.getItems().clear();
         providerMenu.setText("Choose provider");
@@ -38,9 +44,10 @@ public class CreateSMSHandyController {
         tariffRbutton.setUserData("Tariff");
         prepaidRbutton.setUserData("Prepaid");
     }
-    @FXML
-    private void initialize() {
-    }
+
+    /**
+     * Reaction to OK button.
+     */
     @FXML
     private void handleOKButton() {
         String number = numberField.getText().trim();
@@ -84,10 +91,17 @@ public class CreateSMSHandyController {
         }
 
     }
+
+    /**
+     * Reaction to a cancel button.
+     */
     @FXML
     private void handleCancelButton() {
         closeWindow();
     }
+    /**
+     * Closes window.
+     */
     private void closeWindow() {
         Stage stage = (Stage) okButton.getScene().getWindow();
         stage.close();
