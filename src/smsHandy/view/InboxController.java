@@ -92,5 +92,9 @@ public class InboxController {
         stage.close();
     }
     
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+    }
+    
     
 }

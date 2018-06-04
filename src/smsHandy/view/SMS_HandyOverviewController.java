@@ -208,7 +208,7 @@ public class SMS_HandyOverviewController {
                 InboxController controller = fxmlLoader.getController();
                 SmsHandy handy =  smsHandyTableView.getSelectionModel().getSelectedItem();
                 handy.listReceived();
-                //controller.setMainApp(mainApp);
+                controller.setMainApp(mainApp);
                 controller.setSettings(handy);
                 Stage stage = new Stage();
                 stage.setTitle("Inbox");
@@ -236,7 +236,7 @@ public class SMS_HandyOverviewController {
                 SentController controller = fxmlLoader.getController();
                 SmsHandy handy =  smsHandyTableView.getSelectionModel().getSelectedItem();
                 handy.listReceived();
-                //controller.setMainApp(mainApp);
+                controller.setMainApp(mainApp);
                 controller.setSettings(handy);
                 Stage stage = new Stage();
                 stage.setTitle("Sent");
