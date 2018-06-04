@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import smsHandy.MainApp;
+import smsHandy.model.PrepaidSmsHandy;
 import smsHandy.model.Provider;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
@@ -263,7 +264,6 @@ public class SMS_HandyOverviewController {
                 Parent root = fxmlLoader.load();
                 SendMessageController controller = fxmlLoader.getController();
                 SmsHandy handy =  smsHandyTableView.getSelectionModel().getSelectedItem();
-                handy.listReceived();
                 controller.setMainApp(mainApp);
                 controller.setSettings(handy);
                 Stage stage = new Stage();
@@ -275,6 +275,38 @@ public class SMS_HandyOverviewController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            mainApp.showAlert("SMS-Handy is not selected", "Please select SMS-Handy");
+        }
+    }
+    /**
+     * Reaction to a DepositButton click.
+     */
+    @FXML
+    private void handleDepositButton() {
+        int selectedIndex = smsHandyTableView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            if(!smsHandyTableView.getSelectionModel().getSelectedItem().getType().equals("Tariff plan")) {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DepositOverview.fxml"));
+                try {
+                    Parent root = fxmlLoader.load();
+                    DepositController controller = fxmlLoader.getController();
+                    SmsHandy handy =  smsHandyTableView.getSelectionModel().getSelectedItem();
+                    //controller.setMainApp(mainApp);
+                    controller.setSettings((PrepaidSmsHandy)handy);
+                    Stage stage = new Stage();
+                    stage.setTitle("Deposit");
+                    stage.getIcons().add(new Image("file:resources/images/phone.png"));
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } 
+            } else {
+                mainApp.showAlert("SMS-Handy is not prepaid!", "Please select only PrepraidSMSHandy to deposit!");
+            }
+            
         } else {
             mainApp.showAlert("SMS-Handy is not selected", "Please select SMS-Handy");
         }
