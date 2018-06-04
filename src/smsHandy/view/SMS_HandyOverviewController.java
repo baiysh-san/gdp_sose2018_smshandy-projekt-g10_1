@@ -55,7 +55,7 @@ public class SMS_HandyOverviewController {
     private MainApp mainApp;
 
     /**
-     * TODO
+     * initialize tableViews, columns
      */
     @FXML
     private void initialize() {

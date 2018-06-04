@@ -21,8 +21,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
+/**
+ * 
+ * Controller of InboxOverview.fxml
+ *
+ */
 public class InboxController {
+   
     @FXML
     private TableView <Message> inboxTableView;
     @FXML
@@ -36,12 +41,13 @@ public class InboxController {
     @FXML
     private Button cancelButton;
     
-    
-    
     private MainApp mainApp;
     private SmsHandy smsHandy;
     
-    
+    /**
+     * Fills inboxTableView with data from smsHandy
+     * @param smsHandy
+     */
     public void setSettings(SmsHandy smsHandy) {
         this.smsHandy = smsHandy;
         ObservableList<Message> messages = FXCollections.observableArrayList(smsHandy.getReceived());
@@ -51,6 +57,9 @@ public class InboxController {
         dateColumn.setCellValueFactory(cellValue -> cellValue.getValue().getDatePropery());
         
     }
+    /**
+     * Reaction to openButton
+     */
     @FXML
     private void handleOpenButton() {
         int selectedIndex = inboxTableView.getSelectionModel().getSelectedIndex();
@@ -74,6 +83,9 @@ public class InboxController {
             mainApp.showAlert("Message is not selected", "Please select Message");
         }
     }
+    /**
+     * Reaction to cancelButton
+     */
     @FXML
     private void handleCacnelButton() {
         Stage stage = (Stage) openButton.getScene().getWindow();

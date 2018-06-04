@@ -44,7 +44,7 @@ public class DepositController {
         });
     }
     /**
-     * Reaction to uploadButton
+     * Reaction to uploadButton.
      */
     @FXML
     private void handleUploadButton() {

@@ -24,7 +24,7 @@
                </columns>
             </TableView>
             <Button fx:id="openButton" layoutX="314.0" layoutY="416.0" mnemonicParsing="false" onAction="#handleOpenButton" text="Open" />
-            <Button fx:id="cancelButton" layoutX="240.0" layoutY="417.0" mnemonicParsing="false" onAction="#handleCacnelButton" text="Cancel" />
+            <Button fx:id="cancelButton" layoutX="240.0" layoutY="417.0" mnemonicParsing="false" onAction="#handleCancelButton" text="Cancel" />
          </children>
       </AnchorPane>
    </children>

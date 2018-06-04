@@ -17,7 +17,10 @@ import javafx.stage.Stage;
 import smsHandy.MainApp;
 import smsHandy.model.Message;
 import smsHandy.model.SmsHandy;
-
+/**
+ * Controller of SentOverview.fxml
+ *
+ */
 public class SentController {
     @FXML
     private TableView <Message> sentTableView;
@@ -40,6 +43,10 @@ public class SentController {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
+    /**
+     * Fills SentTableView with data from smsHandy
+     * @param smsHandy
+     */
     public void setSettings(SmsHandy smsHandy) {
         this.smsHandy = smsHandy;
         ObservableList<Message> messages = FXCollections.observableArrayList(smsHandy.getSent());
@@ -49,6 +56,9 @@ public class SentController {
         dateColumn.setCellValueFactory(cellValue -> cellValue.getValue().getDatePropery());
         
     }
+    /**
+     * Reaction to openButton
+     */
     @FXML
     private void handleOpenButton() {
         int selectedIndex = sentTableView.getSelectionModel().getSelectedIndex();
@@ -72,8 +82,11 @@ public class SentController {
             mainApp.showAlert("Message is not selected", "Please select Message");
         }
     }
+    /**
+     * Reaction to cancelButton
+     */
     @FXML
-    private void handleCacnelButton() {
+    private void handleCancelButton() {
         Stage stage = (Stage) openButton.getScene().getWindow();
         stage.close();
     }

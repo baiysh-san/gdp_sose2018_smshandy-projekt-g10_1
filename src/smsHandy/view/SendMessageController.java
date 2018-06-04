@@ -16,6 +16,10 @@ import smsHandy.model.PrepaidSmsHandy;
 import smsHandy.model.SmsHandy;
 import smsHandy.model.TariffPlanSmsHandy;
 
+/**
+ * 
+ * Controller of SendMessage.fxml
+ */
 public class SendMessageController {
     
     @FXML
@@ -36,8 +40,11 @@ public class SendMessageController {
     
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        
     }
+    /**
+     * Check is handy prepaid or tariff
+     * @param handy -> currentHandy
+     */
     public void setSettings(SmsHandy handy) {
         currentHandy = handy;
         if(currentHandy.getType() == "Prepaid") {
@@ -46,20 +53,18 @@ public class SendMessageController {
             tariff = (TariffPlanSmsHandy) handy;
         }
     }
-    
+    /**
+     * Reaction to sendButton
+     */
     @FXML
     private void handleSendButton() {
-        
         to = toField.getText();
         /*if(messageArea.getText() == null || messageArea.getText() =="" || messageArea.getText() ==" ") {
             runAnimation("no.png");
             mainApp.showAlert("Message must be not empty", "Please wright at least 1 character!");
         }*/
         content = messageArea.getText();
-        //System.out.println(content);
-        
         try {
-            
             currentHandy.sendSms(to, content);
             if(tariff != null) {
                 if(!tariff.canSendSms()) {
@@ -68,41 +73,42 @@ public class SendMessageController {
                     return;
                 }
             } else {
-                if(!prepaid.canSendSms()) {
+                if (!prepaid.canSendSms()) {
                     runAnimation("no.png");
                     mainApp.showAlert("The limit has expired", "Please upload money!");
                     return;
                 }
             }
-            
             runAnimation("gal.png");
-            
         } catch (NumberFormatException e) {
             runAnimation("no.png");
             mainApp.showAlert("This number doesn't exist", "Please choose an existing number!");
         } catch (Exception e) {
-            
             e.printStackTrace();
         }
     }
+    /**
+     * Reaction to cancelButton
+     */
     @FXML
     private void handleCacnelButton() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
+    /*
+     * Runs animation 
+     */
     public void runAnimation(String imageName) {
-        
-        Image image = new Image("file:resources/images/"+imageName);
-        imageV.setImage(image);
-
-        FadeTransition ft = new FadeTransition();
-        ft.setNode(imageV);
-        ft.setDuration(new Duration(2000));
-        ft.setFromValue(0.0);
-        ft.setToValue(1.0);
-        ft.setCycleCount(6);
-        ft.setAutoReverse(true);
-        ft.play();
-        //iv.setOnMouseClicked(me -> ft.play());
+    Image image = new Image("file:resources/images/"+imageName);
+    imageV.setImage(image);
+    FadeTransition ft = new FadeTransition();
+    ft.setNode(imageV);
+    ft.setDuration(new Duration(2000));
+    ft.setFromValue(0.0);
+    ft.setToValue(1.0);
+    ft.setCycleCount(6);
+    ft.setAutoReverse(true);
+    ft.play();
+    //iv.setOnMouseClicked(me -> ft.play());
     }
 }
