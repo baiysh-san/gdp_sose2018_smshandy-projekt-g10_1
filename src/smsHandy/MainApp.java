@@ -62,7 +62,7 @@ public class MainApp extends Application{
     public void start(Stage stage) throws Exception {
         this.stage = stage;
         this.stage.setTitle("SMS-Handy-App");
-        this.stage.setResizable(false);
+        //this.stage.setResizable(false);
         this.stage.getIcons().add(new Image("file:resources/images/phone.png"));
         showRootPanel();
         showSmsHandyOverview();
