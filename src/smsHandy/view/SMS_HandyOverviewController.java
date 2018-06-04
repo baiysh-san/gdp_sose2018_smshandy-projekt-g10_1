@@ -222,6 +222,9 @@ public class SMS_HandyOverviewController {
             mainApp.showAlert("SMS-Handy is not selected", "Please select SMS-Handy");
         }
     }
+    /**
+     * Reaction to a sentButton click.
+     */
     @FXML
     private void handleSentButton() {
         int selectedIndex = smsHandyTableView.getSelectionModel().getSelectedIndex();
@@ -236,6 +239,35 @@ public class SMS_HandyOverviewController {
                 controller.setSettings(handy);
                 Stage stage = new Stage();
                 stage.setTitle("Sent");
+                stage.getIcons().add(new Image("file:resources/images/phone.png"));
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            mainApp.showAlert("SMS-Handy is not selected", "Please select SMS-Handy");
+        }
+    }
+    
+    /**
+     * Reaction to a SendSMSButton click.
+     */
+    @FXML
+    private void handleSendSMSButton() {
+        int selectedIndex = smsHandyTableView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SendMessage.fxml"));
+            try {
+                Parent root = fxmlLoader.load();
+                SendMessageController controller = fxmlLoader.getController();
+                SmsHandy handy =  smsHandyTableView.getSelectionModel().getSelectedItem();
+                handy.listReceived();
+                controller.setMainApp(mainApp);
+                controller.setSettings(handy);
+                Stage stage = new Stage();
+                stage.setTitle("Send SMS");
                 stage.getIcons().add(new Image("file:resources/images/phone.png"));
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.setScene(new Scene(root));

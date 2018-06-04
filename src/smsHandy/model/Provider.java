@@ -57,7 +57,7 @@ public class Provider {
                 provider.send(message);
                 return true;
             } else {
-                throw new Exception("This number doesn't exist");
+                throw new NumberFormatException("This number doesn't exist");
             }
         }
     }
